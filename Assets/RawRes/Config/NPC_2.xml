@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Talk id="20000002">
+  <Sentence type="default" background="NoColor">
+    <Content>你好啊！呵呵</Content>
+    <Content>需要装备吗？</Content>
+  </Sentence>
+</Talk>

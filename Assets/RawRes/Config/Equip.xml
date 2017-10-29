@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+<Equip id="30000001" type="head" level="1">
+  <Attr>HP</Attr>
+  <Value>10</Value>
+  <Attr>Armor</Attr>
+  <Value>5</Value>
+</Equip>
+
+<Equip id="30000002" type="plate" level="2">
+  <Attr>HP</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000003" type="handguard" level="3">
+  <Attr>HP</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000004" type="bracer" level="3">
+  <Attr>HP</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000005" type="britches" level="3">
+  <Attr>HP</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000006" type="boot" level="3">
+  <Attr>HP</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000007" type="necklace" level="3">
+  <Attr>HP</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000008" type="leftweapon" level="3">
+  <Attr>ATK</Attr>
+  <Value>20</Value>
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+
+<Equip id="30000009" type="shield" level="3">
+  <Attr>Armor</Attr>
+  <Value>10</Value>
+</Equip>
+  
+</Root>

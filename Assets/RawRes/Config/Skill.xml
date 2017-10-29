@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <Skill id="40000001" type="head" level="1">
+    <Attr>patk</Attr>
+    <Value>10</Value>
+  </Skill>
+
+  <Skill id="40000002" type="plate" level="2">
+    <Attr>matk</Attr>
+    <Value>10</Value>
+    <Attr>range</Attr>
+    <Value>3</Value>
+  </Skill>
+
+  <Skill id="40000003" type="handguard" level="3">
+    <Attr>time</Attr>
+    <Value>5</Value>
+    <Attr>patk</Attr>
+    <Value>10</Value>
+  </Skill>
+
+  <Skill id="40000004" type="bracer" level="3">
+    <Attr>matk</Attr>
+    <Value>20</Value>
+    <Attr>range</Attr>
+    <Value>1</Value>
+  </Skill>
+
+  <Skill id="40000005" type="britches" level="3">
+    <Attr>mp</Attr>
+    <Value>20</Value>
+    <Attr>Armor</Attr>
+    <Value>10</Value>
+  </Skill>
+
+  <Skill id="40000006" type="boot" level="3">
+    <Attr>HP</Attr>
+    <Value>20</Value>
+    <Attr>Armor</Attr>
+    <Value>10</Value>
+  </Skill>
+
+  <Skill id="40000007" type="necklace" level="3">
+    <Attr>HP</Attr>
+    <Value>20</Value>
+    <Attr>Armor</Attr>
+    <Value>10</Value>
+  </Skill>
+
+  <Equip id="40000008" type="leftweapon" level="3">
+    <Attr>ATK</Attr>
+    <Value>20</Value>
+    <Attr>Armor</Attr>
+    <Value>10</Value>
+  </Equip>
+
+  <Equip id="40000009" type="shield" level="3">
+    <Attr>patk</Attr>
+    <Value>1</Value>
+  </Equip>
+
+</Root>
