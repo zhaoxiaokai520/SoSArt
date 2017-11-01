@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{60AA4DF0-7301-4475-93F0-8129306482FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ABBuilder</RootNamespace>
+    <AssemblyName>ABBuilder</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AB_Analyze.cs" />
+    <Compile Include="AB_AssetBuildMgr.cs" />
+    <Compile Include="AB_Common.cs" />
+    <Compile Include="AB_Encrypt.cs" />
+    <Compile Include="AB_GameDataBuild.cs" />
+    <Compile Include="AB_GameDataCmd.cs" />
+    <Compile Include="AB_GatherResInfo.cs" />
+    <Compile Include="AB_HeroBattleBuild.cs" />
+    <Compile Include="AB_HeroBuildBase.cs" />
+    <Compile Include="AB_HeroBuildMgr.cs" />
+    <Compile Include="AB_HeroCmdAction.cs" />
+    <Compile Include="AB_HeroCmdActorInfo.cs" />
+    <Compile Include="AB_HeroCmdBase.cs" />
+    <Compile Include="AB_HeroCmdEffect.cs" />
+    <Compile Include="AB_HeroCmdGem.cs" />
+    <Compile Include="AB_HeroCmdIcon.cs" />
+    <Compile Include="AB_HeroCmdSkin.cs" />
+    <Compile Include="AB_HeroCmdSound.cs" />
+    <Compile Include="AB_HeroCmdWeapon.cs" />
+    <Compile Include="AB_HeroObBuild.cs" />
+    <Compile Include="AB_HeroPacketBuild.cs" />
+    <Compile Include="AB_HeroShowBuild.cs" />
+    <Compile Include="AB_SceneBuild.cs" />
+    <Compile Include="AB_SceneCmd.cs" />
+    <Compile Include="AB_ShaderBuild.cs" />
+    <Compile Include="AB_ShaderCmd.cs" />
+    <Compile Include="AB_SharedCmd.cs" />
+    <Compile Include="AB_SharedRes.cs" />
+    <Compile Include="AB_SoundBuild.cs" />
+    <Compile Include="AB_SoundCmd.cs" />
+    <Compile Include="AB_UIBuild.cs" />
+    <Compile Include="AB_UICmd.cs" />
+    <Compile Include="ActionBuilder.cs" />
+    <Compile Include="FlatBuffer\ActionData.cs" />
+    <Compile Include="FlatBuffer\ActionObj.cs" />
+    <Compile Include="FlatBuffer\AgeData.cs" />
+    <Compile Include="FlatBuffer\ArrayObj.cs" />
+    <Compile Include="FlatBuffer\color.cs" />
+    <Compile Include="FlatBuffer\ConditionObj.cs" />
+    <Compile Include="FlatBuffer\EventObj.cs" />
+    <Compile Include="FlatBuffer\HeroAgeDatas.cs" />
+    <Compile Include="FlatBuffer\quat.cs" />
+    <Compile Include="FlatBuffer\TemplateObj.cs" />
+    <Compile Include="FlatBuffer\TrackObj.cs" />
+    <Compile Include="FlatBuffer\VarContext.cs" />
+    <Compile Include="FlatBuffer\VarObj.cs" />
+    <Compile Include="FlatBuffer\vector3.cs" />
+    <Compile Include="FlatBuffer\vector3i.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

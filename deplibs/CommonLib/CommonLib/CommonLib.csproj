@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5FBD2AC0-0741-42DE-B0BB-F8A3B950A9F5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CommonLib</RootNamespace>
+    <AssemblyName>CommonLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractSmartObj.cs" />
+    <Compile Include="CUtilDic.cs" />
+    <Compile Include="CUtilList.cs" />
+    <Compile Include="CUtilListBase.cs" />
+    <Compile Include="CVersion.cs" />
+    <Compile Include="EventBus\EMercuryEvent.cs" />
+    <Compile Include="EventBus\EObjDeliverOPCode.cs" />
+    <Compile Include="EventBus\EventTokenDef.cs" />
+    <Compile Include="EventBus\EventTokenTable.cs" />
+    <Compile Include="EventBus\MEObjDeliver.cs" />
+    <Compile Include="EventBus\Mercury.cs" />
+    <Compile Include="FrameClassAttribute.cs" />
+    <Compile Include="FrameCommandCreatorAttribute.cs" />
+    <Compile Include="GenericCleanupAttribute.cs" />
+    <Compile Include="IO.Compress\BlockType.cs" />
+    <Compile Include="IO.Compress\CompressionMode.cs" />
+    <Compile Include="IO.Compress\CopyEncoder.cs" />
+    <Compile Include="IO.Compress\Crc32Helper.cs" />
+    <Compile Include="IO.Compress\DeflateInput.cs" />
+    <Compile Include="IO.Compress\DeflaterManaged.cs" />
+    <Compile Include="IO.Compress\DeflateStream.cs" />
+    <Compile Include="IO.Compress\DeflateStreamAsyncResult.cs" />
+    <Compile Include="IO.Compress\FastEncoder.cs" />
+    <Compile Include="IO.Compress\FastEncoderStatics.cs" />
+    <Compile Include="IO.Compress\FastEncoderWindow.cs" />
+    <Compile Include="IO.Compress\GZipConstants.cs" />
+    <Compile Include="IO.Compress\GZipDecoder.cs" />
+    <Compile Include="IO.Compress\GZipFormatter.cs" />
+    <Compile Include="IO.Compress\GZipStream.cs" />
+    <Compile Include="IO.Compress\HuffmanTree.cs" />
+    <Compile Include="IO.Compress\IDeflater.cs" />
+    <Compile Include="IO.Compress\IFileFormatReader.cs" />
+    <Compile Include="IO.Compress\IFileFormatWriter.cs" />
+    <Compile Include="IO.Compress\Inflater.cs" />
+    <Compile Include="IO.Compress\InflaterState.cs" />
+    <Compile Include="IO.Compress\InputBuffer.cs" />
+    <Compile Include="IO.Compress\InvalidDataException.cs" />
+    <Compile Include="IO.Compress\Match.cs" />
+    <Compile Include="IO.Compress\OutputBuffer.cs" />
+    <Compile Include="IO.Compress\OutputWindow.cs" />
+    <Compile Include="IO.Compress\SR.cs" />
+    <Compile Include="ISmartObj.cs" />
+    <Compile Include="IUpdatableExtension.cs" />
+    <Compile Include="MatchState.cs" />
+    <Compile Include="PoolHandleExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SharedBuffer.cs" />
+    <Compile Include="Singleton.cs" />
+    <Compile Include="SmartReferencePool.cs" />
+    <Compile Include="StringHelper.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

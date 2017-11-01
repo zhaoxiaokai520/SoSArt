@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MobaGo.Common
 {
-	public abstract class ClassObjPoolBase : IObjPoolCtrl
+	public abstract class ClassObjPoolBase : IObjPool
 	{
 		protected List<object> pool = new List<object>(128);
 
@@ -13,11 +13,11 @@ namespace MobaGo.Common
 		{
 			get
 			{
-				return pool.Capacity;
+				return this.pool.Capacity;
 			}
 			set
 			{
-				pool.Capacity=(value);
+				this.pool.Capacity = value;
 			}
 		}
 

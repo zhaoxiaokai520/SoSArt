@@ -4,7 +4,9 @@ namespace MobaGo.Common
 {
 	public class PooledClassObject
 	{
-		public uint usingSeq;
+        public PooledClassObject next;
+
+        public uint usingSeq;
 
 		public IObjPool holder;
 
@@ -20,10 +22,10 @@ namespace MobaGo.Common
 
 		public void Release()
 		{
-			if (this.holder != null)
+			if (holder != null)
 			{
-				this.OnRelease();
-				this.holder.Release(this);
+				OnRelease();
+				holder.Release(this);
 			}
 		}
 	}
