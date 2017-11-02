@@ -128,7 +128,8 @@ public class CUtilList<T> : CUtilListBase, IEnumerable, IEnumerable<T>
 
 	public void AddRange(IEnumerable<T> collection)
 	{
-		if (collection != null)
+		bool flag = collection != null;
+		if (flag)
 		{
 			IEnumerator<T> enumerator = collection.GetEnumerator();
 			while (enumerator.MoveNext())

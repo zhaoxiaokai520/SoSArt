@@ -364,7 +364,7 @@ public sealed class CUtilObjectPool : Singleton<CUtilObjectPool>
     {
         if (gameObject == null)
         {
-            DebugHelper.LogError("Pool error:" + prefabKey);
+            Debug.LogError("Pool error:" + prefabKey);
             return null;
         }
 
@@ -382,7 +382,7 @@ public sealed class CUtilObjectPool : Singleton<CUtilObjectPool>
         {
             GameObject.DestroyImmediate(cPooledGameObjectScript);
             cPooledGameObjectScript = null;
-            DebugHelper.LogError("CPooledGObjectBehaviour error:" + gameObject2.name);
+            Debug.LogError("CPooledGObjectBehaviour error:" + gameObject2.name);
         }
 
         if (cPooledGameObjectScript == null)

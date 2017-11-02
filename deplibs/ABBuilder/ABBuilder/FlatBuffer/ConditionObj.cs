@@ -34,7 +34,7 @@ namespace MobaGo.FlatBuffer
 
 		public static ConditionObj GetRootAsConditionObj(ByteBuffer _bb, ConditionObj obj)
 		{
-			return obj.__init(_bb.GetInt(_bb.get_Position()) + _bb.get_Position(), _bb);
+			return obj.__init(_bb.GetInt(_bb.Position) + _bb.Position, _bb);
 		}
 
 		public ConditionObj __init(int _i, ByteBuffer _bb)

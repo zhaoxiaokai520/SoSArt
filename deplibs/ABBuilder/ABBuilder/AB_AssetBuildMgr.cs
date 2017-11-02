@@ -298,7 +298,7 @@ public class AB_AssetBuildMgr
 
 	public static void Write()
 	{
-		FileStream fileStream = new FileStream(Application.get_streamingAssetsPath() + "/bundle.txt", FileMode.Create);
+		FileStream fileStream = new FileStream(Application.streamingAssetsPath + "/bundle.txt", FileMode.Create);
 		StreamWriter streamWriter = new StreamWriter(fileStream);
 		foreach (AB_AssetBuildMgr.E_ABBUNLDE_TYPE current in AB_AssetBuildMgr.mAssetBundleMap.Keys)
 		{
@@ -434,7 +434,7 @@ public class AB_AssetBuildMgr
 
 	public static void LoadManifest()
 	{
-		AssetBundle expr_14 = AssetBundle.LoadFromFile(Application.get_streamingAssetsPath() + "/AssetBundle/AssetBundle");
+		AssetBundle expr_14 = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/AssetBundle/AssetBundle");
 		AB_AssetBuildMgr.mManifest = expr_14.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 		expr_14.Unload(false);
 	}

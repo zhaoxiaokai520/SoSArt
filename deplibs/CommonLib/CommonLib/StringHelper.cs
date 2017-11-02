@@ -37,36 +37,43 @@ public class StringHelper
 
 	public static string ASCIIBytesToString(byte[] data)
 	{
-		if (data == null)
-		{
-			return null;
-		}
+		bool flag = data == null;
 		string result;
-		try
-		{
-			result = Encoding.ASCII.GetString(data).TrimEnd(new char[1]);
-		}
-		catch (Exception)
+		if (flag)
 		{
 			result = null;
+		}
+		else
+		{
+			string text;
+			try
+			{
+				text = Encoding.ASCII.GetString(data).TrimEnd(new char[1]);
+			}
+			catch (Exception)
+			{
+				text = null;
+			}
+			result = text;
 		}
 		return result;
 	}
 
 	public static void StringToUTF8Bytes(string str, ref byte[] buffer)
 	{
-		if (str == null || buffer == null)
+		bool flag = str == null || buffer == null;
+		if (!flag)
 		{
-			return;
+			bool flag2 = !str.EndsWith("\0");
+			if (flag2)
+			{
+				str += "\0";
+			}
+			byte[] bytes = Encoding.UTF8.GetBytes(str);
+			int count = (bytes.Length <= buffer.Length) ? bytes.Length : buffer.Length;
+			Buffer.BlockCopy(bytes, 0, buffer, 0, count);
+			buffer[buffer.Length - 1] = 0;
 		}
-		if (!str.EndsWith("\0"))
-		{
-			str += "\0";
-		}
-		byte[] bytes = Encoding.UTF8.GetBytes(str);
-		int count = (bytes.Length <= buffer.Length) ? bytes.Length : buffer.Length;
-		Buffer.BlockCopy(bytes, 0, buffer, 0, count);
-		buffer[buffer.Length - 1] = 0;
 	}
 
 	public static bool IsAvailableString(string str)
@@ -75,26 +82,32 @@ public class StringHelper
 		int i = 0;
 		bool flag = false;
 		int length = str.Length;
+		bool result;
 		while (i < length)
 		{
 			char c = str[i];
-			if (flag)
+			bool flag2 = flag;
+			if (flag2)
 			{
-				if (c < '\udc00' || c > '\udfff')
+				bool flag3 = c < '\udc00' || c > '\udfff';
+				if (flag3)
 				{
 					Debug.Log(string.Format("invalid utf-16 sequence at {0} (missing surrogate tail)", i));
-					return false;
+					result = false;
+					return result;
 				}
 				num += 4;
 				flag = false;
 			}
 			else
 			{
-				if (c < '\u0080')
+				bool flag4 = c < '\u0080';
+				if (flag4)
 				{
 					while (i < length)
 					{
-						if (str[i] >= '\u0080')
+						bool flag5 = str[i] >= '\u0080';
+						if (flag5)
 						{
 							break;
 						}
@@ -103,42 +116,82 @@ public class StringHelper
 					}
 					continue;
 				}
-				if (c < 'ࠀ')
+				bool flag6 = c < 'ࠀ';
+				if (flag6)
 				{
 					num += 2;
 				}
-				else if (c >= '\ud800' && c <= '\udbff')
-				{
-					flag = true;
-				}
 				else
 				{
-					if (c >= '\udc00' && c <= '\udfff')
+					bool flag7 = c >= '\ud800' && c <= '\udbff';
+					if (flag7)
 					{
-						Debug.Log(string.Format("invalid utf-16 sequence at {0} (missing surrogate head)", i));
-						return false;
+						flag = true;
 					}
-					num += 3;
+					else
+					{
+						bool flag8 = c >= '\udc00' && c <= '\udfff';
+						if (flag8)
+						{
+							Debug.Log(string.Format("invalid utf-16 sequence at {0} (missing surrogate head)", i));
+							result = false;
+							return result;
+						}
+						num += 3;
+					}
 				}
 			}
 			i++;
 		}
-		return true;
+		result = true;
+		return result;
 	}
 
 	public static void StringToUTF8Bytes(string str, ref sbyte[] buffer)
 	{
-		if (str == null || buffer == null)
+		bool flag = str == null || buffer == null;
+		if (!flag)
 		{
-			return;
+			bool flag2 = !str.EndsWith("\0");
+			if (flag2)
+			{
+				str += "\0";
+			}
+			byte[] bytes = Encoding.UTF8.GetBytes(str);
+			int count = (bytes.Length <= buffer.Length) ? bytes.Length : buffer.Length;
+			Buffer.BlockCopy(bytes, 0, buffer, 0, count);
+			buffer[buffer.Length - 1] = 0;
 		}
-		if (!str.EndsWith("\0"))
+	}
+
+	public static string AutoAppendString(params object[] strs)
+	{
+		StringHelper.ClearFormater();
+		for (int i = 0; i < strs.Length; i++)
 		{
-			str += "\0";
+			StringHelper.Formater.Append(strs[i]);
 		}
-		byte[] bytes = Encoding.UTF8.GetBytes(str);
-		int count = (bytes.Length <= buffer.Length) ? bytes.Length : buffer.Length;
-		Buffer.BlockCopy(bytes, 0, buffer, 0, count);
-		buffer[buffer.Length - 1] = 0;
+		return StringHelper.Formater.ToString();
+	}
+
+	public static void AutoAppendString(string str1, char str2)
+	{
+		StringHelper.ClearFormater();
+		StringHelper.Formater.Append(str1);
+		StringHelper.Formater.Append(str2);
+	}
+
+	public static void AutoAppendString(string str1, string str2)
+	{
+		StringHelper.ClearFormater();
+		StringHelper.Formater.Append(str1);
+		StringHelper.Formater.Append(str2);
+	}
+
+	public static void AutoAppendString(string str1, int str2)
+	{
+		StringHelper.ClearFormater();
+		StringHelper.Formater.Append(str1);
+		StringHelper.Formater.Append(str2);
 	}
 }

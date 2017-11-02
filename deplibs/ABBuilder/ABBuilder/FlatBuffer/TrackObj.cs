@@ -131,7 +131,7 @@ namespace MobaGo.FlatBuffer
 
 		public static TrackObj GetRootAsTrackObj(ByteBuffer _bb, TrackObj obj)
 		{
-			return obj.__init(_bb.GetInt(_bb.get_Position()) + _bb.get_Position(), _bb);
+			return obj.__init(_bb.GetInt(_bb.Position) + _bb.Position, _bb);
 		}
 
 		public TrackObj __init(int _i, ByteBuffer _bb)

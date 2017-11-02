@@ -46,7 +46,7 @@ namespace MobaGo.FlatBuffer
 
 		public static ActionData GetRootAsActionData(ByteBuffer _bb, ActionData obj)
 		{
-			return obj.__init(_bb.GetInt(_bb.get_Position()) + _bb.get_Position(), _bb);
+			return obj.__init(_bb.GetInt(_bb.Position) + _bb.Position, _bb);
 		}
 
 		public ActionData __init(int _i, ByteBuffer _bb)

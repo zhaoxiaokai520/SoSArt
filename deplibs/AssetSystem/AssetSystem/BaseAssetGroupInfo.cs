@@ -18,7 +18,7 @@ public class BaseAssetGroupInfo
     protected CUtilList<BaseAssetGroupInfo> m_parentbundles = new CUtilList<BaseAssetGroupInfo>();
     protected CUtilList<BaseAssetGroupInfo> m_childbundles = new CUtilList<BaseAssetGroupInfo>();
 
-    internal string m_pathInIFS;
+    public string m_pathInIFS;
 
     protected int m_iChildRefCount = 0;
 
@@ -67,7 +67,7 @@ public class BaseAssetGroupInfo
 #endif
         if (BundleState == eAssetBundleState.Loading)
         {
-            DebugHelper.LogError("Bundle on Loading,so load abort: " + m_pathInIFS);
+            Debug.LogError("Bundle on Loading,so load abort: " + m_pathInIFS);
             return;
         }
 
@@ -201,7 +201,7 @@ public class BaseAssetGroupInfo
             }
         }else if(m_iChildRefCount<0)
         {
-            DebugHelper.LogError("ChildRef error " + m_pathInIFS + " count:" + m_iChildRefCount);
+            Debug.LogError("ChildRef error " + m_pathInIFS + " count:" + m_iChildRefCount);
         }
     }
 
@@ -389,7 +389,7 @@ public class BaseAssetGroupInfo
     {
         if (root == this)
         {
-            DebugHelper.LogError("Find loop dependecy bundle " + m_pathInIFS);
+            Debug.LogError("Find loop dependecy bundle " + m_pathInIFS);
             return false;
         }
 
@@ -415,7 +415,7 @@ public class BaseAssetGroupInfo
             return;
         if (BundleState == eAssetBundleState.Loading)
         {
-            DebugHelper.LogError("can't reach code " + m_pathInIFS);
+            Debug.LogError("can't reach code " + m_pathInIFS);
             return;
         }
         for (int i = 0; i < m_parentbundles.Count; i++)
@@ -423,7 +423,7 @@ public class BaseAssetGroupInfo
             m_parentbundles[i].CheckAndFixBundleLoadedState();
             if (m_parentbundles[i].BundleState != eAssetBundleState.Loaded)
             {
-                DebugHelper.LogError("Parent not loaded: " + m_parentbundles[i].m_pathInIFS + "me: " + m_pathInIFS);
+                Debug.LogError("Parent not loaded: " + m_parentbundles[i].m_pathInIFS + "me: " + m_pathInIFS);
                 if (m_assetBundle != null)
                 {
                     //miRefCnt = 0;

@@ -39,7 +39,8 @@ public class CVersion
 
 	public static string GetPublish()
 	{
-		if (CVersion.s_publish == null)
+		bool flag = CVersion.s_publish == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -48,7 +49,8 @@ public class CVersion
 
 	public static string GetAppVersion()
 	{
-		if (CVersion.s_appVersion == null)
+		bool flag = CVersion.s_appVersion == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -57,7 +59,8 @@ public class CVersion
 
 	public static string GetCodeVersion()
 	{
-		if (CVersion.s_codeVersion == null)
+		bool flag = CVersion.s_codeVersion == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -66,7 +69,8 @@ public class CVersion
 
 	public static string GetiOSBundleVersion()
 	{
-		if (CVersion.s_iOSBundleVersion == null)
+		bool flag = CVersion.s_iOSBundleVersion == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -75,7 +79,8 @@ public class CVersion
 
 	public static string GetResourceVersion()
 	{
-		if (CVersion.s_resourceVersion == null)
+		bool flag = CVersion.s_resourceVersion == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -84,7 +89,8 @@ public class CVersion
 
 	public static int GetAndroidVersionCode()
 	{
-		if (CVersion.s_androidVersionCode == null)
+		bool flag = CVersion.s_androidVersionCode == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -107,7 +113,8 @@ public class CVersion
 
 	public static string GetBuildNumber()
 	{
-		if (CVersion.s_buildNumber == null)
+		bool flag = CVersion.s_buildNumber == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -116,7 +123,8 @@ public class CVersion
 
 	public static string GetRevisonNumber()
 	{
-		if (CVersion.s_revisionNumber == null)
+		bool flag = CVersion.s_revisionNumber == null;
+		if (flag)
 		{
 			CVersion.Initialize();
 		}
@@ -135,16 +143,35 @@ public class CVersion
 
 	public static bool IsSynchronizedVersion(string appVersion, string usedResourceVersion)
 	{
-		if (string.IsNullOrEmpty(appVersion) || string.IsNullOrEmpty(usedResourceVersion))
+		bool flag = string.IsNullOrEmpty(appVersion) || string.IsNullOrEmpty(usedResourceVersion);
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		if (!string.Equals(usedResourceVersion, CVersion.s_usedResourceVersion))
+		else
 		{
-			return false;
+			bool flag2 = !string.Equals(usedResourceVersion, CVersion.s_usedResourceVersion);
+			if (flag2)
+			{
+				result = false;
+			}
+			else
+			{
+				int num = appVersion.LastIndexOf(".");
+				bool flag3 = num < 0;
+				if (flag3)
+				{
+					result = false;
+				}
+				else
+				{
+					string a = appVersion.Substring(0, num);
+					result = string.Equals(a, CVersion.s_codeVersion);
+				}
+			}
 		}
-		int num = appVersion.LastIndexOf(".");
-		return num >= 0 && string.Equals(appVersion.Substring(0, num), CVersion.s_codeVersion);
+		return result;
 	}
 
 	private static void Initialize()
@@ -159,14 +186,17 @@ public class CVersion
 		CVersion.s_androidVersionCode = string.Empty;
 		CVersion.s_iOSBundleVersion = string.Empty;
 		TextAsset textAsset = Resources.Load(CVersion.s_versionTxtPathInResources, typeof(TextAsset)) as TextAsset;
-		if (textAsset != null)
+		bool flag = textAsset != null;
+		if (flag)
 		{
-			string[] array = textAsset.text.Split(new char[]
+			string text = textAsset.text;
+			string[] array = text.Split(new char[]
 			{
 				'[',
 				']'
 			}, 1);
-			if (array != null)
+			bool flag2 = array != null;
+			if (flag2)
 			{
 				for (int i = 0; i < array.Length; i++)
 				{
@@ -174,46 +204,70 @@ public class CVersion
 					{
 						'='
 					}, 1);
-					if (array2 != null && array2.Length == 2)
+					bool flag3 = array2 != null && array2.Length == 2;
+					if (flag3)
 					{
 						for (int j = 0; j < 2; j++)
 						{
 							array2[j] = array2[j].Trim();
 						}
-						if (string.Equals(array2[0], CVersion.s_publishKey, StringComparison.OrdinalIgnoreCase))
+						bool flag4 = string.Equals(array2[0], CVersion.s_publishKey, StringComparison.OrdinalIgnoreCase);
+						if (flag4)
 						{
 							CVersion.s_publish = array2[1];
 						}
-						else if (string.Equals(array2[0], CVersion.s_codeVersionKey, StringComparison.OrdinalIgnoreCase))
+						else
 						{
-							CVersion.s_codeVersion = array2[1];
-						}
-						else if (string.Equals(array2[0], CVersion.s_resourceVersionKey, StringComparison.OrdinalIgnoreCase))
-						{
-							CVersion.s_resourceVersion = array2[1];
-						}
-						else if (string.Equals(array2[0], CVersion.s_buildNumberKey, StringComparison.OrdinalIgnoreCase))
-						{
-							CVersion.s_buildNumber = array2[1];
-						}
-						else if (string.Equals(array2[0], CVersion.s_androidVersionCodeKey, StringComparison.OrdinalIgnoreCase))
-						{
-							CVersion.s_androidVersionCode = array2[1];
-						}
-						else if (string.Equals(array2[0], CVersion.s_iOSBundleVersionKey, StringComparison.OrdinalIgnoreCase))
-						{
-							CVersion.s_iOSBundleVersion = array2[1];
+							bool flag5 = string.Equals(array2[0], CVersion.s_codeVersionKey, StringComparison.OrdinalIgnoreCase);
+							if (flag5)
+							{
+								CVersion.s_codeVersion = array2[1];
+							}
+							else
+							{
+								bool flag6 = string.Equals(array2[0], CVersion.s_resourceVersionKey, StringComparison.OrdinalIgnoreCase);
+								if (flag6)
+								{
+									CVersion.s_resourceVersion = array2[1];
+								}
+								else
+								{
+									bool flag7 = string.Equals(array2[0], CVersion.s_buildNumberKey, StringComparison.OrdinalIgnoreCase);
+									if (flag7)
+									{
+										CVersion.s_buildNumber = array2[1];
+									}
+									else
+									{
+										bool flag8 = string.Equals(array2[0], CVersion.s_androidVersionCodeKey, StringComparison.OrdinalIgnoreCase);
+										if (flag8)
+										{
+											CVersion.s_androidVersionCode = array2[1];
+										}
+										else
+										{
+											bool flag9 = string.Equals(array2[0], CVersion.s_iOSBundleVersionKey, StringComparison.OrdinalIgnoreCase);
+											if (flag9)
+											{
+												CVersion.s_iOSBundleVersion = array2[1];
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
 			}
 		}
-		if (string.IsNullOrEmpty(CVersion.s_iOSBundleVersion))
+		bool flag10 = string.IsNullOrEmpty(CVersion.s_iOSBundleVersion);
+		if (flag10)
 		{
 			CVersion.s_iOSBundleVersion = CVersion.s_codeVersion;
 		}
 		textAsset = (Resources.Load("Revision", typeof(TextAsset)) as TextAsset);
-		if (textAsset != null)
+		bool flag11 = textAsset != null;
+		if (flag11)
 		{
 			CVersion.s_revisionNumber = textAsset.text;
 		}

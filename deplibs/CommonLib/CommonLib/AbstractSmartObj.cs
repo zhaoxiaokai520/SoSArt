@@ -2,9 +2,9 @@ using System;
 
 public abstract class AbstractSmartObj : ISmartObj
 {
-	private int _index = -1;
+	public ISmartObjHolder holder;
 
-	private SmartReferencePool.PoolHandle _handle;
+	private int _index = -1;
 
 	public int index
 	{
@@ -15,18 +15,6 @@ public abstract class AbstractSmartObj : ISmartObj
 		set
 		{
 			this._index = value;
-		}
-	}
-
-	public SmartReferencePool.PoolHandle handle
-	{
-		get
-		{
-			return this._handle;
-		}
-		set
-		{
-			this._handle = value;
 		}
 	}
 

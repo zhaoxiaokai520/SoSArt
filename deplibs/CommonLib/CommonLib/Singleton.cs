@@ -8,7 +8,8 @@ public class Singleton<T> where T : class, new()
 	{
 		get
 		{
-			if (Singleton<T>.s_instance == null)
+			bool flag = Singleton<T>.s_instance == null;
+			if (flag)
 			{
 				Singleton<T>.CreateInstance();
 			}
@@ -22,10 +23,12 @@ public class Singleton<T> where T : class, new()
 
 	public static void CreateInstance()
 	{
-		if (Singleton<T>.s_instance == null)
+		bool flag = Singleton<T>.s_instance == null;
+		if (flag)
 		{
 			Singleton<T>.s_instance = Activator.CreateInstance<T>();
-			if (Singleton<T>.s_instance is Singleton<T>)
+			bool flag2 = Singleton<T>.s_instance is Singleton<T>;
+			if (flag2)
 			{
 				(Singleton<T>.s_instance as Singleton<T>).Init();
 			}
@@ -34,7 +37,8 @@ public class Singleton<T> where T : class, new()
 
 	public static void DestroyInstance()
 	{
-		if (Singleton<T>.s_instance != null)
+		bool flag = Singleton<T>.s_instance != null;
+		if (flag)
 		{
 			(Singleton<T>.s_instance as Singleton<T>).UnInit();
 			Singleton<T>.s_instance = default(T);
@@ -43,7 +47,8 @@ public class Singleton<T> where T : class, new()
 
 	public static T GetInstance()
 	{
-		if (Singleton<T>.s_instance == null)
+		bool flag = Singleton<T>.s_instance == null;
+		if (flag)
 		{
 			Singleton<T>.CreateInstance();
 		}

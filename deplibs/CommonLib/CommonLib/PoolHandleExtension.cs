@@ -1,19 +1,18 @@
 using System;
-using UnityEngine;
 
 public static class PoolHandleExtension
 {
 	public static void Release(this ISmartObj obj)
 	{
-		if (obj != null)
+		bool flag = obj != null;
+		if (flag)
 		{
-			if (obj.handle == null)
+			AbstractSmartObj abstractSmartObj = (AbstractSmartObj)obj;
+			bool flag2 = abstractSmartObj != null && abstractSmartObj.holder != null;
+			if (flag2)
 			{
-				Debug.LogError("PoolHandle: target object is not initialized from SmartReferencePool type:" + obj.GetType());
-				return;
+				abstractSmartObj.holder.Recycle(obj);
 			}
-			obj.handle.Release(obj.index);
-			obj.OnRelease();
 		}
 	}
 }

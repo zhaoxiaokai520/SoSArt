@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractSmartObj.cs" />
+    <Compile Include="Common\IObjPoolBase.cs" />
+    <Compile Include="Common\IObjPoolCtrl.cs" />
+    <Compile Include="Common\PooledClassObject.cs" />
+    <Compile Include="Common\TObjPool.cs" />
     <Compile Include="CUtilDic.cs" />
     <Compile Include="CUtilList.cs" />
     <Compile Include="CUtilListBase.cs" />
@@ -60,48 +64,67 @@
     <Compile Include="EventBus\EventTokenTable.cs" />
     <Compile Include="EventBus\MEObjDeliver.cs" />
     <Compile Include="EventBus\Mercury.cs" />
+    <Compile Include="FlatBuffers\ByteBuffer.cs" />
+    <Compile Include="FlatBuffers\FlatBufferBuilder.cs" />
+    <Compile Include="FlatBuffers\FlatBufferConstants.cs" />
+    <Compile Include="FlatBuffers\Offset.cs" />
+    <Compile Include="FlatBuffers\StringOffset.cs" />
+    <Compile Include="FlatBuffers\Struct.cs" />
+    <Compile Include="FlatBuffers\Table.cs" />
+    <Compile Include="FlatBuffers\VectorOffset.cs" />
     <Compile Include="FrameClassAttribute.cs" />
     <Compile Include="FrameCommandCreatorAttribute.cs" />
     <Compile Include="GenericCleanupAttribute.cs" />
-    <Compile Include="IO.Compress\BlockType.cs" />
-    <Compile Include="IO.Compress\CompressionMode.cs" />
-    <Compile Include="IO.Compress\CopyEncoder.cs" />
-    <Compile Include="IO.Compress\Crc32Helper.cs" />
-    <Compile Include="IO.Compress\DeflateInput.cs" />
-    <Compile Include="IO.Compress\DeflaterManaged.cs" />
-    <Compile Include="IO.Compress\DeflateStream.cs" />
-    <Compile Include="IO.Compress\DeflateStreamAsyncResult.cs" />
-    <Compile Include="IO.Compress\FastEncoder.cs" />
-    <Compile Include="IO.Compress\FastEncoderStatics.cs" />
-    <Compile Include="IO.Compress\FastEncoderWindow.cs" />
-    <Compile Include="IO.Compress\GZipConstants.cs" />
-    <Compile Include="IO.Compress\GZipDecoder.cs" />
-    <Compile Include="IO.Compress\GZipFormatter.cs" />
-    <Compile Include="IO.Compress\GZipStream.cs" />
-    <Compile Include="IO.Compress\HuffmanTree.cs" />
-    <Compile Include="IO.Compress\IDeflater.cs" />
-    <Compile Include="IO.Compress\IFileFormatReader.cs" />
-    <Compile Include="IO.Compress\IFileFormatWriter.cs" />
-    <Compile Include="IO.Compress\Inflater.cs" />
-    <Compile Include="IO.Compress\InflaterState.cs" />
-    <Compile Include="IO.Compress\InputBuffer.cs" />
-    <Compile Include="IO.Compress\InvalidDataException.cs" />
-    <Compile Include="IO.Compress\Match.cs" />
-    <Compile Include="IO.Compress\OutputBuffer.cs" />
-    <Compile Include="IO.Compress\OutputWindow.cs" />
-    <Compile Include="IO.Compress\SR.cs" />
+    <Compile Include="GlobalPool.cs" />
+    <Compile Include="IO.Compression\BlockType.cs" />
+    <Compile Include="IO.Compression\CompressionMode.cs" />
+    <Compile Include="IO.Compression\CopyEncoder.cs" />
+    <Compile Include="IO.Compression\Crc32Helper.cs" />
+    <Compile Include="IO.Compression\DeflateInput.cs" />
+    <Compile Include="IO.Compression\DeflaterManaged.cs" />
+    <Compile Include="IO.Compression\DeflateStream.cs" />
+    <Compile Include="IO.Compression\DeflateStreamAsyncResult.cs" />
+    <Compile Include="IO.Compression\FastEncoder.cs" />
+    <Compile Include="IO.Compression\FastEncoderStatics.cs" />
+    <Compile Include="IO.Compression\FastEncoderWindow.cs" />
+    <Compile Include="IO.Compression\GZipConstants.cs" />
+    <Compile Include="IO.Compression\GZipDecoder.cs" />
+    <Compile Include="IO.Compression\GZipFormatter.cs" />
+    <Compile Include="IO.Compression\GZipStream.cs" />
+    <Compile Include="IO.Compression\HuffmanTree.cs" />
+    <Compile Include="IO.Compression\IDeflater.cs" />
+    <Compile Include="IO.Compression\IFileFormatReader.cs" />
+    <Compile Include="IO.Compression\IFileFormatWriter.cs" />
+    <Compile Include="IO.Compression\Inflater.cs" />
+    <Compile Include="IO.Compression\InflaterState.cs" />
+    <Compile Include="IO.Compression\InputBuffer.cs" />
+    <Compile Include="IO.Compression\InvalidDataException.cs" />
+    <Compile Include="IO.Compression\Match.cs" />
+    <Compile Include="IO.Compression\OutputBuffer.cs" />
+    <Compile Include="IO.Compression\OutputWindow.cs" />
+    <Compile Include="IO.Compression\SR.cs" />
     <Compile Include="ISmartObj.cs" />
+    <Compile Include="ISmartObjHolder.cs" />
     <Compile Include="IUpdatableExtension.cs" />
     <Compile Include="MatchState.cs" />
     <Compile Include="PoolHandleExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proto\TBuf.cs" />
+    <Compile Include="Proto\TError.cs" />
+    <Compile Include="Proto\TReadBuf.cs" />
+    <Compile Include="Proto\TWriteBuf.cs" />
     <Compile Include="SharedBuffer.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="SmartReferencePool.cs" />
     <Compile Include="StringHelper.cs" />
+    <Compile Include="TBetterList.cs" />
+    <Compile Include="TPoolClass.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy  "$(TargetPath)"  "$(ProjectDir)..\..\..\Assets\Plugins\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

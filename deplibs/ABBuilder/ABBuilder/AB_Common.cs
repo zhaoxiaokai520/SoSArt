@@ -9,9 +9,9 @@ public static class AB_Common
 {
 	public static string AB_VERSION = "0.0.1";
 
-	public static string AB_LOCATION = Application.get_streamingAssetsPath() + "/AssetBundle/";
+	public static string AB_LOCATION = Application.streamingAssetsPath + "/AssetBundle/";
 
-	public static string AB_RESINFO_PATH = Application.get_streamingAssetsPath() + "/";
+	public static string AB_RESINFO_PATH = Application.streamingAssetsPath + "/";
 
 	public static string AB_EXT = ".unity3d";
 
@@ -19,17 +19,17 @@ public static class AB_Common
 
 	public static string AB_RES_INFO_PATH = "AssetBundle/";
 
-	public static string AB_IFS_PATH = Application.get_streamingAssetsPath() + "/";
+	public static string AB_IFS_PATH = Application.streamingAssetsPath + "/";
 
 	public static bool AB_SKIP_BUILD = false;
 
 	public static bool AB_SKIP_COOK_AGE = false;
 
-	public static BuildTarget BUILD_TARGET = EditorUserBuildSettings.get_activeBuildTarget();
+	public static BuildTarget BUILD_TARGET = EditorUserBuildSettings.activeBuildTarget;
 
 	private static bool mbUnity5 = true;
 
-	public static BuildAssetBundleOptions AB_OPTION = 22;
+	public static BuildAssetBundleOptions AB_OPTION = (BuildAssetBundleOptions)22;
 
 	private static bool mbOldBuildMethod = true;
 
@@ -169,36 +169,36 @@ public static class AB_Common
 	public static void SetAssetVersion()
 	{
 		string assetVersion = AB_Common.assetVersion;
-		Debug.Log("SetAssetVersion => " + assetVersion);
+		UnityEngine.Debug.Log("SetAssetVersion => " + assetVersion);
 		try
 		{
 			if (!AB_Common.SetVersion(assetVersion))
 			{
-				Debug.LogError("build failed: SetAssetVersion => " + assetVersion);
+                UnityEngine.Debug.LogError("build failed: SetAssetVersion => " + assetVersion);
 			}
 		}
 		catch (Exception ex)
 		{
-			Debug.LogError(string.Format("build failed: SetAssetVersion => {0}, error: {1} ", AB_Common.assetVersion, ex.Message));
+            UnityEngine.Debug.LogError(string.Format("build failed: SetAssetVersion => {0}, error: {1} ", AB_Common.assetVersion, ex.Message));
 		}
 	}
 
 	[MenuItem("AssetsBundle/Build All UnCompress(Unity 5)")]
 	private static string BuildAll5UnCompress()
 	{
-		return AB_Common.BuildAll5WithOption(17);
+		return AB_Common.BuildAll5WithOption((BuildAssetBundleOptions)17);
 	}
 
 	[MenuItem("AssetsBundle/Build All LZ4(Unity 5)")]
 	private static string BuildAll5LZ4()
 	{
-		return AB_Common.BuildAll5WithOption(272);
+		return AB_Common.BuildAll5WithOption((BuildAssetBundleOptions)272);
 	}
 
 	[MenuItem("AssetsBundle/Build All(Unity 5)")]
 	private static string BuildAll5()
 	{
-		return AB_Common.BuildAll5WithOption(16);
+		return AB_Common.BuildAll5WithOption((BuildAssetBundleOptions)16);
 	}
 
 	[MenuItem("AssetsBundle/Clear")]
@@ -223,31 +223,31 @@ public static class AB_Common
 		AB_SharedRes.BuildSharedRes();
 		AB_GameDataBuild.BuildGameData();
 		stopwatch.Stop();
-		Debug.Log("Pass Time Shader Shared GameData: " + stopwatch.ElapsedMilliseconds);
+        UnityEngine.Debug.Log("Pass Time Shader Shared GameData: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build Hero.....", 0.3f);
 		stopwatch.Reset();
 		stopwatch.Start();
 		AB_HeroBuildMgr.BuildHero();
 		stopwatch.Stop();
-		Debug.Log("Pass Time Hero: " + stopwatch.ElapsedMilliseconds);
+        UnityEngine.Debug.Log("Pass Time Hero: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build Scene.....", 0.45f);
 		stopwatch.Reset();
 		stopwatch.Start();
 		AB_SceneBuild.BuildScene();
 		stopwatch.Stop();
-		Debug.Log("Pass Time Scene: " + stopwatch.ElapsedMilliseconds);
+        UnityEngine.Debug.Log("Pass Time Scene: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build UI Sound.....", 0.6f);
 		stopwatch.Reset();
 		stopwatch.Start();
 		AB_UIBuild.BuildUI();
 		stopwatch.Stop();
-		Debug.Log("Pass Time UI: " + stopwatch.ElapsedMilliseconds);
+        UnityEngine.Debug.Log("Pass Time UI: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Gather Info.....", 0.75f);
 		stopwatch.Reset();
 		stopwatch.Start();
 		AB_GatherResInfo.GatherResInfo();
 		stopwatch.Stop();
-		Debug.Log("Pass Time GatherResInfo: " + stopwatch.ElapsedMilliseconds);
+        UnityEngine.Debug.Log("Pass Time GatherResInfo: " + stopwatch.ElapsedMilliseconds);
 		AB_Encrypt.DeleteEncryptBundleFile();
 		AssetDatabase.Refresh();
 		BuildPipeline.BuildAssetBundles(AB_Common.AB_PATH, AB_AssetBuildMgr.Parse(), opt, AB_Common.BUILD_TARGET);
@@ -334,7 +334,7 @@ public static class AB_Common
 			return path;
 		}
 		num += text.Length;
-		return Application.get_dataPath() + path.Substring(num, path.Length - num);
+		return Application.dataPath + path.Substring(num, path.Length - num);
 	}
 
 	public static string PathRemoveAssets(string path)

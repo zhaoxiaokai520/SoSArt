@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace MobaGo.EventBus
@@ -8,7 +9,7 @@ namespace MobaGo.EventBus
 	{
 		public class MercuryEventBase : AbstractSmartObj
 		{
-			protected int _eventId;
+			protected int _eventId = 0;
 
 			public int eventId
 			{
@@ -43,7 +44,6 @@ namespace MobaGo.EventBus
 			private int _sessionId = -1;
 
 			[method: CompilerGenerated]
-			[CompilerGenerated]
 			private event Mercury.MecruryEventCallback evts;
 
 			public int sessionId
@@ -71,7 +71,8 @@ namespace MobaGo.EventBus
 
 			public void RemoveAllListeners()
 			{
-				if (this.evts != null)
+				bool flag = this.evts != null;
+				if (flag)
 				{
 					Delegate[] invocationList = this.evts.GetInvocationList();
 					for (int i = 0; i < invocationList.Length; i++)
@@ -83,7 +84,8 @@ namespace MobaGo.EventBus
 
 			public void Invoke(object sender, Mercury.MercuryEventBase e)
 			{
-				if (this.evts != null)
+				bool flag = this.evts != null;
+				if (flag)
 				{
 					this.evts(sender, e);
 				}
@@ -97,76 +99,95 @@ namespace MobaGo.EventBus
 
 		private Dictionary<int, Mercury.Session> _sessionSlots = new Dictionary<int, Mercury.Session>();
 
-		private Mercury.Session _recentSession;
+		private Mercury.Session _recentSession = null;
+
+		private static Mercury.Session _reserved = new Mercury.Session();
 
 		public int AccquireSession()
 		{
-			Mercury.Session session = Singleton<SmartReferencePool>.instance.Fetch<Mercury.Session>(16, 4);
+			Mercury.Session session = TPoolClass<Mercury.Session>.AutoCreate(16);
 			this._sessionSlots.Add(session.sessionId, session);
 			return session.sessionId;
 		}
 
 		public void ReleaseSession(int token)
 		{
-			if (this._recentSession != null && this._recentSession.sessionId == token)
+			bool flag = this._recentSession != null && this._recentSession.sessionId == token;
+			if (flag)
 			{
 				this._recentSession.Release();
 				this._recentSession = null;
 				this._sessionSlots.Remove(token);
-				return;
 			}
-			if (this._sessionSlots.ContainsKey(token))
+			else
 			{
-				this._sessionSlots[token].Release();
-				this._sessionSlots.Remove(token);
+				bool flag2 = this._sessionSlots.ContainsKey(token);
+				if (flag2)
+				{
+					this._sessionSlots[token].Release();
+					this._sessionSlots.Remove(token);
+				}
 			}
 		}
 
 		public void AddListener(int token, Mercury.MecruryEventCallback cb)
 		{
-			if (cb != null)
+			bool flag = cb != null;
+			if (flag)
 			{
-				if (this._recentSession != null && this._recentSession.sessionId == token)
+				bool flag2 = this._recentSession != null && this._recentSession.sessionId == token;
+				if (flag2)
 				{
 					this._recentSession.AddListener(cb);
-					return;
 				}
-				this._recentSession = this._sessionSlots[token];
-				this._recentSession.AddListener(cb);
+				else
+				{
+					this._recentSession = this._sessionSlots[token];
+					this._recentSession.AddListener(cb);
+				}
 			}
 		}
 
 		public void RemoveListener(int token, Mercury.MecruryEventCallback cb)
 		{
-			if (cb != null)
+			bool flag = cb != null;
+			if (flag)
 			{
-				if (this._recentSession != null && this._recentSession.sessionId == token)
+				bool flag2 = this._recentSession != null && this._recentSession.sessionId == token;
+				if (flag2)
 				{
 					this._recentSession.RemoveListener(cb);
-					return;
 				}
-				this._recentSession = this._sessionSlots[token];
-				this._recentSession.RemoveListener(cb);
+				else
+				{
+					this._recentSession = this._sessionSlots[token];
+					this._recentSession.RemoveListener(cb);
+				}
 			}
 		}
 
 		public void RemoveAllListeners(int token)
 		{
-			if (this._recentSession != null && this._recentSession.sessionId == token)
+			bool flag = this._recentSession != null && this._recentSession.sessionId == token;
+			if (flag)
 			{
 				this._recentSession.RemoveAllListeners();
-				return;
 			}
-			this._recentSession = this._sessionSlots[token];
-			this._recentSession.RemoveAllListeners();
+			else
+			{
+				this._recentSession = this._sessionSlots[token];
+				this._recentSession.RemoveAllListeners();
+			}
 		}
 
 		public void Broadcast(int token, object sender, Mercury.MercuryEventBase e)
 		{
-			if (this._recentSession == null || this._recentSession.sessionId != token)
+			bool flag = this._recentSession == null || this._recentSession.sessionId != token;
+			if (flag)
 			{
 				this._recentSession = this._sessionSlots[token];
-				if (this._recentSession != null)
+				bool flag2 = this._recentSession != null;
+				if (flag2)
 				{
 					this._recentSession.Invoke(sender, e);
 				}

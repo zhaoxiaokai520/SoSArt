@@ -8,7 +8,7 @@ namespace MobaGo.EventBus
 
 		private object[] _args = new object[3];
 
-		private int _opcode;
+		private int _opcode = 0;
 
 		public object[] args
 		{

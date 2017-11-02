@@ -7,12 +7,12 @@ public static class AB_SceneBuild
 {
 	public static void BuildScene()
 	{
-		EditorBuildSettingsScene[] scenes = EditorBuildSettings.get_scenes();
+		EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
 		for (int i = 0; i < scenes.Length; i++)
 		{
 			EditorBuildSettingsScene expr_0D = scenes[i];
-			FileInfo mFileInfo = new FileInfo(expr_0D.get_path());
-			string[] expr_2E = expr_0D.get_path().Split(new char[]
+			FileInfo mFileInfo = new FileInfo(expr_0D.path);
+			string[] expr_2E = expr_0D.path.Split(new char[]
 			{
 				'/'
 			});

@@ -120,7 +120,7 @@ public static class ActionBuilder
 		Offset<ActionData> offset = ActionData.CreateActionData(flatBufferBuilder, templateObjsOffset, referenceParamsOffset, actionOffset);
 		flatBufferBuilder.Finish(offset.Value);
 		FileStream expr_F6 = File.Create(text);
-		expr_F6.Write(flatBufferBuilder.SizedByteArray(), 0, flatBufferBuilder.get_SizedArrayLength());
+		expr_F6.Write(flatBufferBuilder.SizedByteArray(), 0, flatBufferBuilder.SizedArrayLength);
 		expr_F6.Close();
 		if (!CFileManager.IsFileExist(text))
 		{

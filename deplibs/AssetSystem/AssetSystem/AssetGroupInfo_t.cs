@@ -97,7 +97,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
             else
             {
                 if(dependency==null)
-                    DebugHelper.LogError("Dependencies is null " + m_dependencies[s]);
+                    Debug.LogError("Dependencies is null " + m_dependencies[s]);
             }
         }
     }
@@ -282,7 +282,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
         string text = CFileManager.CombinePath(ifsExtractPath, m_pathInIFS);
         if (!CFileManager.IsFileExist(text))
         {
-            DebugHelper.LogError("File " + text + " can not be found!!!");
+            Debug.LogError("File " + text + " can not be found!!!");
             return;
         }
 #if DEBUG_LOGOUT
@@ -313,7 +313,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
                     }
                     else
                     {
-                        DebugHelper.LogError("AES Error: " + text);
+                        Debug.LogError("AES Error: " + text);
                     }
                 }
                 else
@@ -323,7 +323,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
             }
             catch (Exception e)
             {
-                DebugHelper.LogError(e.ToString());
+                Debug.LogError(e.ToString());
                 resBundle = null;
             }
             if (resBundle != null)
@@ -331,7 +331,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
                 break;
             }
             num++;
-            DebugHelper.Log(string.Concat(new object[]
+            Debug.Log(string.Concat(new object[]
             {
                 "Create AssetBundle ",
                 text,
@@ -369,7 +369,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
                 CVersion.GetUsedResourceVersion(),
                 text2
             });
-            DebugHelper.LogError(text3);        
+            Debug.LogError(text3);        
         }
         OnBundleLoadResult(resBundle);
     }
@@ -461,7 +461,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
         string text = CFileManager.CombinePath(ifsExtractPath, m_pathInIFS);
         if (!CFileManager.IsFileExist(text))
         {
-            DebugHelper.Log("File " + text + " can not be found!!!");
+            Debug.Log("File " + text + " can not be found!!!");
             return;
         }
 
@@ -488,7 +488,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
                     }
                     else
                     {
-                        DebugHelper.LogError("AES Error: " + text);
+                        Debug.LogError("AES Error: " + text);
                     }
                 }
                 else
@@ -498,7 +498,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
             }
             catch (Exception e)
             {
-                DebugHelper.LogError(e.ToString());
+                Debug.LogError(e.ToString());
                 createRequest = null;
             }
             if (createRequest != null)
@@ -506,7 +506,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
                 break;
             }
             num++;
-            DebugHelper.Log(string.Concat(new object[]
+            Debug.Log(string.Concat(new object[]
             {
                 "Create AsyncLoadingOpe ",
                 text,
@@ -539,7 +539,7 @@ public class AssetGroupInfo_t: BaseAssetGroupInfo
                 CVersion.GetUsedResourceVersion(),
                 text2
             });
-            DebugHelper.LogError(text3);
+            Debug.LogError(text3);
         }
 
         OnAsyncBundleLoadResult(createRequest);

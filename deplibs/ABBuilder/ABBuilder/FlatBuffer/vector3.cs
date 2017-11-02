@@ -51,7 +51,7 @@ namespace MobaGo.FlatBuffer
 
 		public static vector3 GetRootAsvector3(ByteBuffer _bb, vector3 obj)
 		{
-			return obj.__init(_bb.GetInt(_bb.get_Position()) + _bb.get_Position(), _bb);
+			return obj.__init(_bb.GetInt(_bb.Position) + _bb.Position, _bb);
 		}
 
 		public vector3 __init(int _i, ByteBuffer _bb)

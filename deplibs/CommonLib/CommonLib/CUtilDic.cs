@@ -23,10 +23,11 @@ public class CUtilDic<TKey, TValue> : IEnumerable, IEnumerable<KeyValuePair<TKey
 			get
 			{
 				KeyValuePair<TKey, object> current = this.Iter.Current;
-				TKey arg_4C_0 = current.Key;
+				TKey key = current.Key;
 				KeyValuePair<TKey, object> current2 = this.Iter.Current;
+				bool flag = current2.Value != null;
 				TValue value;
-				if (current2.Value != null)
+				if (flag)
 				{
 					KeyValuePair<TKey, object> current3 = this.Iter.Current;
 					value = (TValue)((object)current3.Value);
@@ -35,7 +36,7 @@ public class CUtilDic<TKey, TValue> : IEnumerable, IEnumerable<KeyValuePair<TKey
 				{
 					value = default(TValue);
 				}
-				return new KeyValuePair<TKey, TValue>(arg_4C_0, value);
+				return new KeyValuePair<TKey, TValue>(key, value);
 			}
 		}
 
@@ -77,11 +78,7 @@ public class CUtilDic<TKey, TValue> : IEnumerable, IEnumerable<KeyValuePair<TKey
 		get
 		{
 			object obj = this.Context[key];
-			if (obj != null)
-			{
-				return (TValue)((object)obj);
-			}
-			return default(TValue);
+			return (obj == null) ? default(TValue) : ((TValue)((object)obj));
 		}
 		set
 		{
@@ -140,9 +137,9 @@ public class CUtilDic<TKey, TValue> : IEnumerable, IEnumerable<KeyValuePair<TKey
 	public bool TryGetValue(TKey key, out TValue value)
 	{
 		object obj = null;
-		bool arg_2A_0 = this.Context.TryGetValue(key, out obj);
+		bool result = this.Context.TryGetValue(key, out obj);
 		value = ((obj == null) ? default(TValue) : ((TValue)((object)obj)));
-		return arg_2A_0;
+		return result;
 	}
 
 	public CUtilDic<TKey, TValue>.Enumerator GetEnumerator()

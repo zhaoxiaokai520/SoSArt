@@ -291,12 +291,16 @@ public static class Utility
 
 	public static bool LinkedListInsert<T>(LinkedList<T> list, T atom, Utility.InsertComparsionFunc<T> func)
 	{
-		if (list != null && atom != null)
+		bool flag = list != null && atom != null;
+		bool result;
+		if (flag)
 		{
-			if (list.Count == 0)
+			bool flag2 = list.Count == 0;
+			if (flag2)
 			{
 				list.AddFirst(atom);
-				return true;
+				result = true;
+				return result;
 			}
 			LinkedListNode<T> linkedListNode = list.First;
 			LinkedListNode<T> linkedListNode2 = null;
@@ -305,30 +309,39 @@ public static class Utility
 				T value = linkedListNode.Value;
 				T last = (linkedListNode2 != null) ? linkedListNode2.Value : default(T);
 				int num = func(atom, value, last);
-				if (num == -1)
+				bool flag3 = num == -1;
+				if (flag3)
 				{
 					list.AddBefore(linkedListNode, atom);
-					return true;
+					result = true;
+					return result;
 				}
-				if (num == 1)
+				bool flag4 = num == 1;
+				if (flag4)
 				{
 					list.AddAfter(linkedListNode2, atom);
-					return true;
+					result = true;
+					return result;
 				}
-				if (num == 2)
+				bool flag5 = num == 2;
+				if (flag5)
 				{
-					return false;
+					result = false;
+					return result;
 				}
 				linkedListNode2 = linkedListNode;
 				linkedListNode = linkedListNode.Next;
 			}
-			if (func(atom, linkedListNode2.Value, default(T)) != 2)
+			bool flag6 = func(atom, linkedListNode2.Value, default(T)) != 2;
+			if (flag6)
 			{
 				list.AddLast(atom);
-				return true;
+				result = true;
+				return result;
 			}
 		}
-		return false;
+		result = false;
+		return result;
 	}
 
 	public static int SparseArray_Compress(byte[] indata, int size, ref byte[] outdata)
@@ -343,7 +356,8 @@ public static class Utility
 			int num3 = Math.Min(8, size - i);
 			for (int j = 0; j < num3; j++)
 			{
-				if (indata[i + j] != 0)
+				bool flag = indata[i + j] > 0;
+				if (flag)
 				{
 					b2 |= (byte)(1 << j);
 					outdata[num++] = indata[i + j];
@@ -351,7 +365,8 @@ public static class Utility
 			}
 			outdata[num2] = b2;
 			i += num3;
-			if (i >= size)
+			bool flag2 = i >= size;
+			if (flag2)
 			{
 				outdata[0] = (byte)((int)b << 4 | (int)((byte)(num - num2)));
 			}
@@ -363,7 +378,7 @@ public static class Utility
 	{
 		int result = 0;
 		byte b = (byte)((indata[0] & 240) >> 4);
-		byte b2 = System.Convert.ToByte(System.Convert.ToInt32(indata[0]) & 15);
+		byte b2 = System.Convert.ToByte(indata[0] & 15);
 		int num = 8;
 		int i = 1;
 		while (i < size)
@@ -371,7 +386,9 @@ public static class Utility
 			byte b3 = indata[i++];
 			for (int j = 0; j < num; j++)
 			{
-				if ((byte)((1 << j & (int)b3) >> j) == 1)
+				byte b4 = (byte)((1 << j & (int)b3) >> j);
+				bool flag = b4 == 1;
+				if (flag)
 				{
 					outdata[result++] = indata[i++];
 				}
@@ -380,7 +397,8 @@ public static class Utility
 					outdata[result++] = 0;
 				}
 			}
-			if (i == size - (int)b2)
+			bool flag2 = i == size - (int)b2;
+			if (flag2)
 			{
 				num = (int)((b > 0) ? b : 8);
 			}
@@ -399,7 +417,7 @@ public static class Utility
 
 	public static void NotifyEvents(object sender, int channel, int op)
 	{
-		MEObjDeliver mEObjDeliver = Singleton<SmartReferencePool>.instance.Fetch<MEObjDeliver>(32, 4);
+		MEObjDeliver mEObjDeliver = TPoolClass<MEObjDeliver>.AutoCreate();
 		mEObjDeliver.opcode = op;
 		Singleton<Mercury>.instance.Broadcast(channel, sender, mEObjDeliver);
 	}
@@ -409,77 +427,88 @@ public static class Utility
 		int result = 0;
 		using (Stream stream = new MemoryStream(indata))
 		{
-			result = Utility.Zlib_Internal_DecompressBuffer(new GZipStream(stream, CompressionMode.Decompress), out outdata);
+			Stream decompressor = new GZipStream(stream, CompressionMode.Decompress);
+			result = Utility.Zlib_Internal_DecompressBuffer(decompressor, out outdata);
 		}
 		return result;
 	}
 
 	public static int Gzip_CompressData(byte[] indata, out byte[] outdata)
 	{
-		SharedBuffer sharedBuffer = Singleton<SmartReferencePool>.instance.Fetch<SharedBuffer>(32, 4);
+		SharedBuffer sharedBuffer = TPoolClass<SharedBuffer>.AutoCreate();
 		int num = indata.Length * 2 + 512;
-		if (sharedBuffer.buffer.Length < num)
+		bool flag = sharedBuffer.buffer.Length < num;
+		if (flag)
 		{
 			sharedBuffer.buffer = new byte[Utility.NextPowerOfTwo(num)];
 		}
 		outdata = null;
 		Stream stream = new MemoryStream(sharedBuffer.buffer, 0, sharedBuffer.buffer.Length, true, true);
 		Stream compressor = new GZipStream(stream, CompressionMode.Compress, true);
-		int arg_72_0 = Utility.Zlib_Internal_CompressBuffer(indata, indata.Length, compressor, out outdata);
+		int result = Utility.Zlib_Internal_CompressBuffer(indata, indata.Length, compressor, out outdata);
 		stream.Close();
 		sharedBuffer.Release();
-		return arg_72_0;
+		return result;
 	}
 
 	private static int Zlib_Internal_CompressBuffer(byte[] rawdata, int rawdataLength, Stream compressor, out byte[] outdata)
 	{
 		outdata = null;
-		if (rawdata == null || rawdataLength <= 0 || rawdata.Length < rawdataLength)
-		{
-			return 0;
-		}
-		bool flag = false;
-		MemoryStream memoryStream = (MemoryStream)((GZipStream)compressor).BaseStream;
-		try
-		{
-			compressor.Write(rawdata, 0, rawdataLength);
-			compressor.Close();
-		}
-		catch (Exception ex)
-		{
-			flag = true;
-			Debug.LogError(string.Concat(new object[]
-			{
-				"FAILURE: Zlib_Internal_CompressBuffer - data length = ",
-				rawdataLength,
-				", ",
-				ex.Message
-			}));
-		}
-		int num;
+		bool flag = rawdata == null || rawdataLength <= 0 || rawdata.Length < rawdataLength;
+		int result;
 		if (flag)
 		{
-			num = 0;
+			result = 0;
 		}
 		else
 		{
-			num = (int)memoryStream.Position;
-			SharedBuffer sharedBuffer = Singleton<SmartReferencePool>.instance.Fetch<SharedBuffer>(32, 4);
-			if (sharedBuffer.buffer.Length < num)
+			bool flag2 = false;
+			GZipStream gZipStream = (GZipStream)compressor;
+			MemoryStream memoryStream = (MemoryStream)gZipStream.BaseStream;
+			try
 			{
-				sharedBuffer.buffer = new byte[Utility.NextPowerOfTwo(num)];
+				compressor.Write(rawdata, 0, rawdataLength);
+				compressor.Close();
 			}
-			outdata = sharedBuffer.buffer;
-			Buffer.BlockCopy(memoryStream.GetBuffer(), 0, outdata, 0, num);
-			sharedBuffer.Release();
+			catch (Exception ex)
+			{
+				flag2 = true;
+				Debug.LogError(string.Concat(new object[]
+				{
+					"FAILURE: Zlib_Internal_CompressBuffer - data length = ",
+					rawdataLength,
+					", ",
+					ex.Message
+				}));
+			}
+			bool flag3 = flag2;
+			int num;
+			if (flag3)
+			{
+				num = 0;
+			}
+			else
+			{
+				num = (int)memoryStream.Position;
+				SharedBuffer sharedBuffer = TPoolClass<SharedBuffer>.AutoCreate();
+				bool flag4 = sharedBuffer.buffer.Length < num;
+				if (flag4)
+				{
+					sharedBuffer.buffer = new byte[Utility.NextPowerOfTwo(num)];
+				}
+				outdata = sharedBuffer.buffer;
+				Buffer.BlockCopy(memoryStream.GetBuffer(), 0, outdata, 0, num);
+				sharedBuffer.Release();
+			}
+			result = num;
 		}
-		return num;
+		return result;
 	}
 
 	private static int Zlib_Internal_DecompressBuffer(Stream decompressor, out byte[] outdata)
 	{
-		SharedBuffer sharedBuffer = Singleton<SmartReferencePool>.instance.Fetch<SharedBuffer>(32, 4);
-		SharedBuffer sharedBuffer2 = Singleton<SmartReferencePool>.instance.Fetch<SharedBuffer>(32, 4);
+		SharedBuffer sharedBuffer = TPoolClass<SharedBuffer>.AutoCreate();
+		SharedBuffer sharedBuffer2 = TPoolClass<SharedBuffer>.AutoCreate();
 		byte[] buffer = sharedBuffer.buffer;
 		int num = 0;
 		int num2 = 0;
@@ -489,7 +518,8 @@ public static class Utility
 			while ((num3 = decompressor.Read(buffer, 0, buffer.Length)) != 0)
 			{
 				num += num3;
-				if (num2 + num3 >= sharedBuffer2.buffer.Length)
+				bool flag = num2 + num3 >= sharedBuffer2.buffer.Length;
+				if (flag)
 				{
 					byte[] array = new byte[Utility.NextPowerOfTwo(sharedBuffer2.buffer.Length + num3)];
 					Buffer.BlockCopy(sharedBuffer2.buffer, 0, array, 0, num2);

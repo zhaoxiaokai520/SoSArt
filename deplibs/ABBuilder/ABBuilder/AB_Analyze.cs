@@ -92,14 +92,14 @@ public class AB_Analyze
 
 	private static void AnalyzeAB(bool bShowDetail = false)
 	{
-		string text = Application.get_streamingAssetsPath() + "/analyze";
+		string text = Application.streamingAssetsPath + "/analyze";
 		if (!CFileManager.IsDirectoryExist(text))
 		{
 			CFileManager.CreateDirectory(text);
 		}
 		FileStream fileStream = new FileStream(text + "/analyze.csv", FileMode.Create);
 		StreamWriter streamWriter = new StreamWriter(fileStream);
-		AssetBundle expr_4C = AssetBundle.LoadFromFile(Application.get_streamingAssetsPath() + "/AssetBundle/AssetBundle");
+		AssetBundle expr_4C = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/AssetBundle/AssetBundle");
 		AssetBundleManifest assetBundleManifest = expr_4C.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
 		expr_4C.Unload(false);
 		streamWriter.WriteLine("文件名,大小,总共大小,依赖资源包");
@@ -107,7 +107,7 @@ public class AB_Analyze
 		List<AB_Analyze.AB_Node> list = new List<AB_Analyze.AB_Node>();
 		for (int i = 0; i < allAssetBundles.Length; i++)
 		{
-			FileInfo fileInfo = new FileInfo(Application.get_streamingAssetsPath() + "/AssetBundle/" + allAssetBundles[i]);
+			FileInfo fileInfo = new FileInfo(Application.streamingAssetsPath + "/AssetBundle/" + allAssetBundles[i]);
 			if (fileInfo != null)
 			{
 				AB_Analyze.AB_Node item = new AB_Analyze.AB_Node(fileInfo);
@@ -245,7 +245,7 @@ public class AB_Analyze
 			AB_Analyze.mCheckDictionary.Add(text, new List<string>());
 			AB_Analyze.CheckDeps(AB_AssetBuildMgr.mManifest, text, text);
 		}
-		string text2 = Application.get_streamingAssetsPath() + "/analyze";
+		string text2 = Application.streamingAssetsPath + "/analyze";
 		if (!CFileManager.IsDirectoryExist(text2))
 		{
 			CFileManager.CreateDirectory(text2);
