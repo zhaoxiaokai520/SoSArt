@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class AB_SharedRes
+public class ABSharedRes
 {
 	public static string msSharedFolder = "Assets/Exporter/Common/";
 
@@ -20,11 +20,11 @@ public class AB_SharedRes
 
 	public static void Init()
 	{
-		AB_SharedRes.mResPackerInfos.Clear();
-		AB_SharedRes.mFolders.Clear();
-		AB_SharedRes.mSharedResMap.Clear();
-		AB_SharedRes.mCommonActionMap.Clear();
-		AB_SharedRes.mPackerBuilderList.Clear();
+		ABSharedRes.mResPackerInfos.Clear();
+		ABSharedRes.mFolders.Clear();
+		ABSharedRes.mSharedResMap.Clear();
+		ABSharedRes.mCommonActionMap.Clear();
+		ABSharedRes.mPackerBuilderList.Clear();
 	}
 
 	public static void BuildSharedRes()
@@ -34,16 +34,16 @@ public class AB_SharedRes
 			Debug.LogWarning("Haven't implement for U4!!");
 			return;
 		}
-		AB_SharedRes.BuildSharedResU5Ex();
+		ABSharedRes.BuildSharedResU5Ex();
 	}
 
 	private static void BuildSharedResU5()
 	{
-		AB_SharedRes.FindFolder(new DirectoryInfo(AB_SharedRes.msSharedFolder));
-		for (int i = 0; i < AB_SharedRes.mFolders.Count; i++)
+		ABSharedRes.FindFolder(new DirectoryInfo(ABSharedRes.msSharedFolder));
+		for (int i = 0; i < ABSharedRes.mFolders.Count; i++)
 		{
-			AB_SharedRes.BuildAssetBundle(AB_SharedRes.mFolders[i]);
-			AB_SharedRes.BuildResourceInfo(AB_SharedRes.mFolders[i]);
+			ABSharedRes.BuildAssetBundle(ABSharedRes.mFolders[i]);
+			ABSharedRes.BuildResourceInfo(ABSharedRes.mFolders[i]);
 		}
 	}
 
@@ -51,14 +51,14 @@ public class AB_SharedRes
 	{
 		string empty = string.Empty;
 		string empty2 = string.Empty;
-		if (AB_SharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
+		if (ABSharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
 		{
-			string assetBundleName = AB_SharedRes.GetAssetBundleName(empty, empty2);
-			AB_AssetBuildMgr.AssetBundleBuildEX assetBundleBuild = AB_AssetBuildMgr.GetAssetBundleBuild(AB_SharedRes.GetType(empty), assetBundleName);
+			string assetBundleName = ABSharedRes.GetAssetBundleName(empty, empty2);
+			AB_AssetBuildMgr.AssetBundleBuildEX assetBundleBuild = AB_AssetBuildMgr.GetAssetBundleBuild(ABSharedRes.GetType(empty), assetBundleName);
 			if (dd.Name.ToLower().Equals("action") || dd.FullName.ToLower().Contains("newplayaction" + Path.DirectorySeparatorChar.ToString() + "equip") || dd.FullName.ToLower().Contains("newplayaction" + Path.DirectorySeparatorChar.ToString() + "soldiereffect"))
 			{
 				AB_HeroCmdAction aB_HeroCmdAction = new AB_HeroCmdAction(dd);
-				AB_SharedRes.mCommonActionMap.Add(dd.Name, aB_HeroCmdAction);
+				ABSharedRes.mCommonActionMap.Add(dd.Name, aB_HeroCmdAction);
 				aB_HeroCmdAction.BuildCmd();
 				AssetDatabase.Refresh();
 				List<string> aBFileList = aB_HeroCmdAction.GetABFileList();
@@ -81,12 +81,12 @@ public class AB_SharedRes
 						{
 							if (!AB_AssetBuildMgr.ContainAsset(AB_AssetBuildMgr.E_ABBUNLDE_TYPE.E_SHADER, dependencies[k]))
 							{
-								if (!AB_SharedRes.mSharedResMap.ContainsKey(dependencies[k]))
+								if (!ABSharedRes.mSharedResMap.ContainsKey(dependencies[k]))
 								{
-									AB_SharedRes.mSharedResMap.Add(dependencies[k], 1);
+									ABSharedRes.mSharedResMap.Add(dependencies[k], 1);
 									AB_AssetBuildMgr.AddAsset(assetBundleBuild, dependencies[k]);
 								}
-								Dictionary<string, int> arg_1B9_0 = AB_SharedRes.mSharedResMap;
+								Dictionary<string, int> arg_1B9_0 = ABSharedRes.mSharedResMap;
 								string key = dependencies[k];
 								int num = arg_1B9_0[key];
 								arg_1B9_0[key] = num + 1;
@@ -96,12 +96,12 @@ public class AB_SharedRes
 					else
 					{
 						string text = AB_Common.Absolute2RelativePath(fileInfo.FullName);
-						if (!AB_SharedRes.mSharedResMap.ContainsKey(text))
+						if (!ABSharedRes.mSharedResMap.ContainsKey(text))
 						{
-							AB_SharedRes.mSharedResMap.Add(text, 1);
+							ABSharedRes.mSharedResMap.Add(text, 1);
 							AB_AssetBuildMgr.AddAsset(assetBundleBuild, text);
 						}
-						Dictionary<string, int> arg_218_0 = AB_SharedRes.mSharedResMap;
+						Dictionary<string, int> arg_218_0 = ABSharedRes.mSharedResMap;
 						string key = text;
 						int num = arg_218_0[key];
 						arg_218_0[key] = num + 1;
@@ -115,23 +115,23 @@ public class AB_SharedRes
 	{
 		string empty = string.Empty;
 		string empty2 = string.Empty;
-		if (AB_SharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
+		if (ABSharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
 		{
-			string assetGroupBundleName = AB_SharedRes.GetAssetGroupBundleName(empty, empty2);
+			string assetGroupBundleName = ABSharedRes.GetAssetGroupBundleName(empty, empty2);
 			AssetGroupInfo_t assetGroupInfo_t = AB_GatherResInfo.CreateCResourcePackerInfo();
 			assetGroupInfo_t.m_pathInIFS = assetGroupBundleName;
-			assetGroupInfo_t.m_tag = AB_SharedRes.GetTag(empty);
+			assetGroupInfo_t.m_tag = ABSharedRes.GetTag(empty);
 			if (dd.Name.ToLower().Equals("action") || dd.FullName.ToLower().Contains("newplayaction" + Path.DirectorySeparatorChar.ToString() + "equip") || dd.FullName.ToLower().Contains("newplayaction" + Path.DirectorySeparatorChar.ToString() + "soldiereffect"))
 			{
 				assetGroupInfo_t.SetFlag(eBundleFlag.Resident);
-				foreach (string current in AB_SharedRes.mCommonActionMap[dd.Name].GetAssetGroupFileList())
+				foreach (string current in ABSharedRes.mCommonActionMap[dd.Name].GetAssetGroupFileList())
 				{
 					AssetInfo_t item = default(AssetInfo_t);
 					item.m_pathName = CFileManager.EraseExtension(AB_Common.PathRemoveAssets(current));
 					item.m_extension = "bytes";
 					assetGroupInfo_t.m_resourceInfos.Add(item);
 				}
-				AB_SharedRes.mResPackerInfos.Add(assetGroupInfo_t);
+				ABSharedRes.mResPackerInfos.Add(assetGroupInfo_t);
 				return;
 			}
 			if (empty.ToLower().Contains("font"))
@@ -155,7 +155,7 @@ public class AB_SharedRes
 					assetGroupInfo_t.m_resourceInfos.Add(item2);
 				}
 			}
-			AB_SharedRes.mResPackerInfos.Add(assetGroupInfo_t);
+			ABSharedRes.mResPackerInfos.Add(assetGroupInfo_t);
 		}
 	}
 
@@ -166,26 +166,26 @@ public class AB_SharedRes
 		{
 			if (files[i].Extension != ".meta")
 			{
-				AB_SharedRes.mFolders.Add(path);
+				ABSharedRes.mFolders.Add(path);
 				break;
 			}
 		}
 		DirectoryInfo[] directories = path.GetDirectories();
 		for (int j = 0; j < directories.Length; j++)
 		{
-			AB_SharedRes.FindFolder(directories[j]);
+			ABSharedRes.FindFolder(directories[j]);
 		}
 	}
 
 	private static bool GetFolder(string path, ref string folder1, ref string folder2)
 	{
 		path = path.Replace("\\", "/");
-		int num = path.IndexOf(AB_SharedRes.msSharedFolder);
+		int num = path.IndexOf(ABSharedRes.msSharedFolder);
 		if (num == -1)
 		{
 			return false;
 		}
-		string text = path.Substring(num + AB_SharedRes.msSharedFolder.Length);
+		string text = path.Substring(num + ABSharedRes.msSharedFolder.Length);
 		if (text.Contains("/"))
 		{
 			string[] array = text.Split(new char[]
@@ -289,20 +289,20 @@ public class AB_SharedRes
 
 	private static void BuildSharedResU5Ex()
 	{
-		AB_SharedRes.FindFolder(new DirectoryInfo(AB_SharedRes.msSharedFolder));
-		for (int i = 0; i < AB_SharedRes.mFolders.Count; i++)
+		ABSharedRes.FindFolder(new DirectoryInfo(ABSharedRes.msSharedFolder));
+		for (int i = 0; i < ABSharedRes.mFolders.Count; i++)
 		{
-			AB_SharedRes.BuildAssetBundleEx(AB_SharedRes.mFolders[i]);
+			ABSharedRes.BuildAssetBundleEx(ABSharedRes.mFolders[i]);
 		}
-		using (List<AB_HeroPacketBuild>.Enumerator enumerator = AB_SharedRes.mPackerBuilderList.GetEnumerator())
+		using (List<AB_HeroPacketBuild>.Enumerator enumerator = ABSharedRes.mPackerBuilderList.GetEnumerator())
 		{
 			while (enumerator.MoveNext())
 			{
 				foreach (string current in enumerator.Current.mAllABFileList.Keys)
 				{
-					if (!AB_SharedRes.mSharedResMap.ContainsKey(current))
+					if (!ABSharedRes.mSharedResMap.ContainsKey(current))
 					{
-						AB_SharedRes.mSharedResMap.Add(current, 1);
+						ABSharedRes.mSharedResMap.Add(current, 1);
 					}
 				}
 			}
@@ -313,9 +313,9 @@ public class AB_SharedRes
 	{
 		string empty = string.Empty;
 		string empty2 = string.Empty;
-		if (AB_SharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
+		if (ABSharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
 		{
-			string assetBundleName = AB_SharedRes.GetAssetBundleName(empty, empty2);
+			string assetBundleName = ABSharedRes.GetAssetBundleName(empty, empty2);
 			int num = 0;
 			if (empty.ToLower().Contains("font"))
 			{
@@ -334,12 +334,12 @@ public class AB_SharedRes
 				num |= 8;
 				num |= 64;
 			}
-			AB_HeroPacketBuild aB_HeroPacketBuild = new AB_HeroPacketBuild(AB_SharedRes.GetType(empty), assetBundleName, num);
-			AB_HeroCmdBase cmd = AB_SharedRes.CreateCmd(empty, dd);
+			AB_HeroPacketBuild aB_HeroPacketBuild = new AB_HeroPacketBuild(ABSharedRes.GetType(empty), assetBundleName, num);
+			AB_HeroCmdBase cmd = ABSharedRes.CreateCmd(empty, dd);
 			aB_HeroPacketBuild.AddCmd(cmd);
 			aB_HeroPacketBuild.BuildCmd();
 			aB_HeroPacketBuild.BuildRes(null, true);
-			AB_SharedRes.mPackerBuilderList.Add(aB_HeroPacketBuild);
+			ABSharedRes.mPackerBuilderList.Add(aB_HeroPacketBuild);
 		}
 	}
 

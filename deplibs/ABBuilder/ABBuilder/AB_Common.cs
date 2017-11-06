@@ -220,7 +220,7 @@ public static class AB_Common
 		Stopwatch stopwatch = Stopwatch.StartNew();
 		AB_AssetBuildMgr.Clear();
 		AB_ShaderBuild.BuildShader();
-		AB_SharedRes.BuildSharedRes();
+		ABSharedRes.BuildSharedRes();
 		AB_GameDataBuild.BuildGameData();
 		stopwatch.Stop();
         UnityEngine.Debug.Log("Pass Time Shader Shared GameData: " + stopwatch.ElapsedMilliseconds);
@@ -271,7 +271,7 @@ public static class AB_Common
 		{
 			CFileManager.CreateDirectory(AB_Common.AB_LOCATION);
 		}
-		AB_SharedRes.Init();
+		ABSharedRes.Init();
 		AB_HeroBuildMgr.Init();
 		AB_GatherResInfo.Init();
 		AB_Encrypt.Init();

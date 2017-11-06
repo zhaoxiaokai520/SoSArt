@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ABImpl : MonoBehaviour {
+public class ABBuildImpl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

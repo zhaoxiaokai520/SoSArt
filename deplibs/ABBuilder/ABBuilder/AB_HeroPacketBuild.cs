@@ -128,9 +128,9 @@ public class AB_HeroPacketBuild
 				string extension = CFileManager.GetExtension(current);
 				if (!extension.ToLower().Equals(".cs") && !extension.ToLower().Equals(".shader") && !extension.ToLower().Equals(".meta"))
 				{
-					if (AB_SharedRes.mSharedResMap.ContainsKey(current))
+					if (ABSharedRes.mSharedResMap.ContainsKey(current))
 					{
-						Dictionary<string, int> arg_9C_0 = AB_SharedRes.mSharedResMap;
+						Dictionary<string, int> arg_9C_0 = ABSharedRes.mSharedResMap;
 						string key = current;
 						int num = arg_9C_0[key];
 						arg_9C_0[key] = num + 1;

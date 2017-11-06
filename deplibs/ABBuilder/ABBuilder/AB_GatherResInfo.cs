@@ -94,15 +94,15 @@ public class AB_GatherResInfo
 
 	private static bool GatherSharedResList()
 	{
-		for (int i = 0; i < AB_SharedRes.mResPackerInfos.Count; i++)
+		for (int i = 0; i < ABSharedRes.mResPackerInfos.Count; i++)
 		{
-			if (!AB_GatherResInfo.mResPackerInfoSet.m_assetGroupInfosAll.ContainsKey(AB_SharedRes.mResPackerInfos[i].m_pathInIFS))
+			if (!AB_GatherResInfo.mResPackerInfoSet.m_assetGroupInfosAll.ContainsKey(ABSharedRes.mResPackerInfos[i].m_pathInIFS))
 			{
-				AB_GatherResInfo.mResPackerInfoSet.AddAssetGroupInfo(AB_SharedRes.mResPackerInfos[i]);
+				AB_GatherResInfo.mResPackerInfoSet.AddAssetGroupInfo(ABSharedRes.mResPackerInfos[i]);
 			}
 			else
 			{
-				AB_GatherResInfo.mResPackerInfoSet.m_assetGroupInfosAll[AB_SharedRes.mResPackerInfos[i].m_pathInIFS] = AB_SharedRes.mResPackerInfos[i];
+				AB_GatherResInfo.mResPackerInfoSet.m_assetGroupInfosAll[ABSharedRes.mResPackerInfos[i].m_pathInIFS] = ABSharedRes.mResPackerInfos[i];
 			}
 		}
 		return true;
