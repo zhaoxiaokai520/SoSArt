@@ -64,7 +64,9 @@ public class ABAssetBuildMgr
 		E_SOUND,
 		E_WEAPON,
 		E_GEM,
-		E_ILLEGAL
+		E_ILLEGAL,
+        E_CONFIG,
+        E_CONFIG_MAP,
 	}
 
 	public class CollectRedundancy

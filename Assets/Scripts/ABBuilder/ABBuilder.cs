@@ -45,50 +45,12 @@ public static class ABBuilder {
         EditorUtility.DisplayProgressBar("Build All", "Build Shader Shared GameData.....", 0.15f);
         System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
         ABAssetBuildMgr.Clear();
-        AB_ShaderBuild.BuildShader();
+        //AB_ShaderBuild.BuildShader();
         ABSharedRes.BuildSharedRes();
-        AB_GameDataBuild.BuildGameData();
+        AssetDatabase.Refresh();
+        BuildPipeline.BuildAssetBundles(AB_PATH, ABAssetBuildMgr.Parse(), opt, BUILD_TARGET);
         stopwatch.Stop();
         EditorUtility.ClearProgressBar();
-        //UnityEngine.Debug.Log("Pass Time Shader Shared GameData: " + stopwatch.ElapsedMilliseconds);
-        //EditorUtility.DisplayProgressBar("Build All", "Build Hero.....", 0.3f);
-        //stopwatch.Reset();
-        //stopwatch.Start();
-        //ABRoleBuildMgr.BuildHero();
-        //stopwatch.Stop();
-        //UnityEngine.Debug.Log("Pass Time Hero: " + stopwatch.ElapsedMilliseconds);
-        //EditorUtility.DisplayProgressBar("Build All", "Build Scene.....", 0.45f);
-        //stopwatch.Reset();
-        //stopwatch.Start();
-        //AB_SceneBuild.BuildScene();
-        //stopwatch.Stop();
-        //UnityEngine.Debug.Log("Pass Time Scene: " + stopwatch.ElapsedMilliseconds);
-        //EditorUtility.DisplayProgressBar("Build All", "Build UI Sound.....", 0.6f);
-        //stopwatch.Reset();
-        //stopwatch.Start();
-        //AB_UIBuild.BuildUI();
-        //stopwatch.Stop();
-        //UnityEngine.Debug.Log("Pass Time UI: " + stopwatch.ElapsedMilliseconds);
-        //EditorUtility.DisplayProgressBar("Build All", "Gather Info.....", 0.75f);
-        //stopwatch.Reset();
-        //stopwatch.Start();
-        //AB_GatherResInfo.GatherResInfo();
-        //stopwatch.Stop();
-        //UnityEngine.Debug.Log("Pass Time GatherResInfo: " + stopwatch.ElapsedMilliseconds);
-        //AB_Encrypt.DeleteEncryptBundleFile();
-        //AssetDatabase.Refresh();
-        //BuildPipeline.BuildAssetBundles(AB_Common.AB_PATH, ABAssetBuildMgr.Parse(), opt, AB_Common.BUILD_TARGET);
-        //AB_GatherResInfo.PostBuild();
-        //ABAssetBuildMgr.Write();
-        //AB_Encrypt.EncryptFile();
-        //EditorUtility.ClearProgressBar();
-        //AB_Analyze.CheckAB();
-        //if (AB_Analyze.mErrorMessageList.Count > 0)
-        //{
-        //    EditorUtility.DisplayDialog("Error", "AB存在相互依赖", "OK");
-        //    return "Error";
-        //}
-        //EditorUtility.DisplayDialog("Build All", "Build Complete!!!!" + AB_GatherResInfo.GetPublish(), "OK");
         //return AB_GatherResInfo.GetPublish();
         return "";
     }

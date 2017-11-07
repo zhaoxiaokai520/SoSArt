@@ -47,24 +47,12 @@ public class ABSharedRes
 		{
 			string assetBundleName = ABSharedRes.GetAssetBundleName(empty, empty2);
 			ABAssetBuildMgr.AssetBundleBuildEX assetBundleBuild = ABAssetBuildMgr.GetAssetBundleBuild(ABSharedRes.GetType(empty), assetBundleName);
-			if (dd.Name.ToLower().Equals("action") || dd.FullName.ToLower().Contains("newplayaction" + Path.DirectorySeparatorChar.ToString() + "equip") || dd.FullName.ToLower().Contains("newplayaction" + Path.DirectorySeparatorChar.ToString() + "soldiereffect"))
-			{
-				AB_HeroCmdAction aB_HeroCmdAction = new AB_HeroCmdAction(dd);
-				ABSharedRes.mCommonActionMap.Add(dd.Name, aB_HeroCmdAction);
-				aB_HeroCmdAction.BuildCmd();
-				AssetDatabase.Refresh();
-				List<string> aBFileList = aB_HeroCmdAction.GetABFileList();
-				for (int i = 0; i < aBFileList.Count; i++)
-				{
-					ABAssetBuildMgr.AddAsset(assetBundleBuild, AB_Common.Absolute2RelativePath(aBFileList[i]));
-				}
-				return;
-			}
+
 			FileInfo[] files = dd.GetFiles();
 			for (int j = 0; j < files.Length; j++)
 			{
 				FileInfo fileInfo = files[j];
-				if (!fileInfo.Extension.Equals(".meta") && !empty.ToLower().Contains("action"))
+				if (!fileInfo.Extension.Equals(".meta"))
 				{
 					if (fileInfo.Extension.Equals(".prefab"))
 					{
@@ -209,46 +197,16 @@ public class ABSharedRes
 
 	private static ABAssetBuildMgr.E_ABBUNLDE_TYPE GetType(string folder1)
 	{
-		if (folder1.ToLower().Contains("texture") || folder1.ToLower().Contains("skymanage"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_TEXTURE;
-		}
-		if (folder1.ToLower().Contains("action"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_ACTION;
-		}
-		if (folder1.ToLower().Contains("actorinfo"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_ACTORINFO;
-		}
-		if (folder1.ToLower().Contains("effect"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_EFFECT;
-		}
-		if (folder1.ToLower().Contains("gamedata") || folder1.ToLower().Contains("scenedesign"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_GAMEDATA;
-		}
-		if (folder1.ToLower().Contains("font"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_FONT;
-		}
-		if (folder1.ToLower().Equals("ui") || folder1.ToLower().Equals("icon"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_UI;
-		}
-		if (folder1.ToLower().Contains("sound"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_SOUND;
-		}
-		if (folder1.ToLower().Equals("equipment"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_EFFECT;
-		}
-		if (folder1.ToLower().Equals("uimodel"))
-		{
-			return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_EFFECT;
-		}
+        if (folder1.ToLower().Contains("config.map"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_CONFIG_MAP;
+        }
+
+        if (folder1.ToLower().Contains("config"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_CONFIG;
+        }
+		
 		Debug.LogError("Error Type: " + folder1);
 		return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_ILLEGAL;
 	}
@@ -331,7 +289,9 @@ public class ABSharedRes
 
 	private static string GetAssetBundleName(string folder1, string folder2)
 	{
-		return ("public" + folder1 + folder2).ToLower() + AB_Common.AB_EXT;
+        folder1 = folder1.Replace('.', '_');
+        folder2 = folder2.Replace('.', '_');
+        return (folder1 + folder2).ToLower() + AB_Common.AB_EXT;
 	}
 
 	private static string GetAssetGroupBundleName(string folder1, string folder2)
