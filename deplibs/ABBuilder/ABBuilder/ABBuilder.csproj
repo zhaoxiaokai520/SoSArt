@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ABBuilder</RootNamespace>
     <AssemblyName>ABBuilder</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,10 +66,10 @@
     <Compile Include="AB_GatherResInfo.cs" />
     <Compile Include="AB_HeroBattleBuild.cs" />
     <Compile Include="AB_HeroBuildBase.cs" />
-    <Compile Include="AB_HeroBuildMgr.cs" />
+    <Compile Include="ABHeroBuildMgr.cs" />
     <Compile Include="AB_HeroCmdAction.cs" />
     <Compile Include="AB_HeroCmdActorInfo.cs" />
-    <Compile Include="AB_HeroCmdBase.cs" />
+    <Compile Include="ABCmdBase.cs" />
     <Compile Include="AB_HeroCmdEffect.cs" />
     <Compile Include="AB_HeroCmdGem.cs" />
     <Compile Include="AB_HeroCmdIcon.cs" />

@@ -218,7 +218,7 @@ public static class AB_Common
 		AB_Common.InitAll();
 		EditorUtility.DisplayProgressBar("Build All", "Build Shader Shared GameData.....", 0.15f);
 		Stopwatch stopwatch = Stopwatch.StartNew();
-		AB_AssetBuildMgr.Clear();
+		ABAssetBuildMgr.Clear();
 		AB_ShaderBuild.BuildShader();
 		ABSharedRes.BuildSharedRes();
 		AB_GameDataBuild.BuildGameData();
@@ -227,7 +227,7 @@ public static class AB_Common
 		EditorUtility.DisplayProgressBar("Build All", "Build Hero.....", 0.3f);
 		stopwatch.Reset();
 		stopwatch.Start();
-		AB_HeroBuildMgr.BuildHero();
+		ABRoleBuildMgr.BuildHero();
 		stopwatch.Stop();
         UnityEngine.Debug.Log("Pass Time Hero: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build Scene.....", 0.45f);
@@ -250,9 +250,9 @@ public static class AB_Common
         UnityEngine.Debug.Log("Pass Time GatherResInfo: " + stopwatch.ElapsedMilliseconds);
 		AB_Encrypt.DeleteEncryptBundleFile();
 		AssetDatabase.Refresh();
-		BuildPipeline.BuildAssetBundles(AB_Common.AB_PATH, AB_AssetBuildMgr.Parse(), opt, AB_Common.BUILD_TARGET);
+		BuildPipeline.BuildAssetBundles(AB_Common.AB_PATH, ABAssetBuildMgr.Parse(), opt, AB_Common.BUILD_TARGET);
 		AB_GatherResInfo.PostBuild();
-		AB_AssetBuildMgr.Write();
+		ABAssetBuildMgr.Write();
 		AB_Encrypt.EncryptFile();
 		EditorUtility.ClearProgressBar();
 		AB_Analyze.CheckAB();
@@ -272,7 +272,7 @@ public static class AB_Common
 			CFileManager.CreateDirectory(AB_Common.AB_LOCATION);
 		}
 		ABSharedRes.Init();
-		AB_HeroBuildMgr.Init();
+		ABRoleBuildMgr.Init();
 		AB_GatherResInfo.Init();
 		AB_Encrypt.Init();
 		EditorSceneManager.OpenScene("Assets/Scenes/packScene.unity");
