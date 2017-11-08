@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\xlog">
+      <UniqueIdentifier>{205a5e66-bff0-4149-a1f6-a24e43b9bfbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog">
+      <UniqueIdentifier>{560b4800-ba12-40f4-b4d6-2a22d905e9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars">
+      <UniqueIdentifier>{1f30f7e8-c3ce-442c-9d28-4922228bd992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\app">
+      <UniqueIdentifier>{397d007d-123c-4af9-bf4e-181110b450b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\baseevent">
+      <UniqueIdentifier>{52437a42-f4f0-49f1-9705-e1295d848f95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\comm">
+      <UniqueIdentifier>{663efced-d697-43bc-bae3-c3690fd814d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\comm\windows">
+      <UniqueIdentifier>{e44ab454-a6af-477e-af25-16c198005ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\comm\windows\sys">
+      <UniqueIdentifier>{1c826b09-a0a2-4b65-a9ff-24185a43ceb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\openssl">
+      <UniqueIdentifier>{d741ce3b-8ef1-446f-9eda-4a825de7d815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\sdt">
+      <UniqueIdentifier>{6b2495a0-d37d-45f9-a8fd-17975e1af2a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\stn">
+      <UniqueIdentifier>{31e839a5-7aab-4fb2-817f-298731488de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\xlog">
+      <UniqueIdentifier>{42363406-cd54-4395-905c-b05de3789fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\log">
+      <UniqueIdentifier>{0f3a8a02-fa9f-4363-9d59-2364a7bf0402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\xlog\mars\log\crypt">
+      <UniqueIdentifier>{69f490a5-fae8-43af-bffa-9cb76125d848}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Connector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xlog\longlink_packer.cc">
+      <Filter>Source Files\xlog</Filter>
+    </ClCompile>
+    <ClCompile Include="xlog\shortlink_packer.cc">
+      <Filter>Source Files\xlog</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Connector.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\log_crypt.h">
+      <Filter>Header Files\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\longlink_packer.h">
+      <Filter>Header Files\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\shortlink_packer.h">
+      <Filter>Header Files\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\stnproto_logic.h">
+      <Filter>Header Files\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\app\app_logic.h">
+      <Filter>Header Files\xlog\mars\app</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\app\app.h">
+      <Filter>Header Files\xlog\mars\app</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\baseevent\base_logic.h">
+      <Filter>Header Files\xlog\mars\baseevent</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\string_cast.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\strutil.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\time_utils.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\verinfo.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\autobuffer.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\comm_data.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\http.h">
+      <Filter>Header Files\xlog\mars\comm</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\windows\projdef.h">
+      <Filter>Header Files\xlog\mars\comm\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\windows\sys\time.h">
+      <Filter>Header Files\xlog\mars\comm\windows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\comm\windows\sys\cdefs.h">
+      <Filter>Header Files\xlog\mars\comm\windows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\rsa_crypt.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\rsa_pss_sha256.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\aes_crypt.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\ecdh_crypt.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\ecdsa_verify.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\gen_rsa_key_pair.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\openssl\md5_digest.h">
+      <Filter>Header Files\xlog\mars\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\sdt\sdt_logic.h">
+      <Filter>Header Files\xlog\mars\sdt</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\sdt\sdt.h">
+      <Filter>Header Files\xlog\mars\sdt</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\stn\stn_logic.h">
+      <Filter>Header Files\xlog\mars\stn</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\stn\stn.h">
+      <Filter>Header Files\xlog\mars\stn</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\xlog\xloggerbase.h">
+      <Filter>Header Files\xlog\mars\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\xlog\appender.h">
+      <Filter>Header Files\xlog\mars\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\xlog\preprocessor.h">
+      <Filter>Header Files\xlog\mars\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\xlog\xlogger.h">
+      <Filter>Header Files\xlog\mars\xlog</Filter>
+    </ClInclude>
+    <ClInclude Include="xlog\include\mars\log\crypt\uECC.h">
+      <Filter>Header Files\xlog\mars\log\crypt</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
