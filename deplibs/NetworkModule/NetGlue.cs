@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NetworkModule
 {
-    class NetBridge
+    class NetGlue
     {
+
     }
 }

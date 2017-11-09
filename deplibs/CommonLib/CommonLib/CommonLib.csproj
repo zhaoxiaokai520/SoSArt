@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;UNITY_STANDALONE_WIN</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -108,6 +108,7 @@
     <Compile Include="ISmartObjHolder.cs" />
     <Compile Include="IUpdatableExtension.cs" />
     <Compile Include="MatchState.cs" />
+    <Compile Include="NativePluginHelper.cs" />
     <Compile Include="PoolHandleExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proto\TBuf.cs" />
