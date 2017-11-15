@@ -213,37 +213,9 @@ public class ABSharedRes
 
 	private static int GetTag(string folder1)
 	{
-		if (folder1.ToLower().Contains("texture") || folder1.ToLower().Contains("skymanage"))
+		if (folder1.ToLower().Contains("config"))
 		{
-			return 8;
-		}
-		if (folder1.ToLower().Contains("action"))
-		{
-			return 5;
-		}
-		if (folder1.ToLower().Contains("actorinfo"))
-		{
-			return 6;
-		}
-		if (folder1.ToLower().Contains("effect"))
-		{
-			return 11;
-		}
-		if (folder1.ToLower().Contains("gamedata") || folder1.ToLower().Contains("scenedesign"))
-		{
-			return 4;
-		}
-		if (folder1.ToLower().Contains("font"))
-		{
-			return 13;
-		}
-		if (folder1.ToLower().Equals("ui") || folder1.ToLower().Equals("icon"))
-		{
-			return 3;
-		}
-		if (folder1.ToLower().Contains("sound"))
-		{
-			return 12;
+			return 1;
 		}
 		Debug.LogError("Error Tag: " + folder1);
 		return 17;
