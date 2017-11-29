@@ -227,7 +227,7 @@ public static class AB_Common
 		EditorUtility.DisplayProgressBar("Build All", "Build Hero.....", 0.3f);
 		stopwatch.Reset();
 		stopwatch.Start();
-		ABRoleBuildMgr.BuildHero();
+		ABRoleRes.BuildHero();
 		stopwatch.Stop();
         UnityEngine.Debug.Log("Pass Time Hero: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build Scene.....", 0.45f);
@@ -272,7 +272,7 @@ public static class AB_Common
 			CFileManager.CreateDirectory(AB_Common.AB_LOCATION);
 		}
 		ABSharedRes.Init();
-		ABRoleBuildMgr.Init();
+		ABRoleRes.Init();
 		AB_GatherResInfo.Init();
 		AB_Encrypt.Init();
 		EditorSceneManager.OpenScene("Assets/Scenes/packScene.unity");

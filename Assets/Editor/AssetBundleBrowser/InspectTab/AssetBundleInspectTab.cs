@@ -468,7 +468,18 @@ namespace UnityEngine.AssetBundles
                 bundle = AssetBundle.LoadFromFile(path);
                 if (null == bundle)
                 {
-                    return null;
+                    //encrypt bundle should decode
+                    byte[] rawdata = CFileManager.ReadFile(path);
+                    byte[] decodeBytes = CFileManager.AESDecrypt(rawdata, "forthelichking!!");
+                    if (null != decodeBytes)
+                    {
+                        bundle = AssetBundle.LoadFromMemory(decodeBytes);
+                    }
+
+                    if (null == bundle)
+                    {
+                        return null;
+                    }
                 }
 
                 m_loadedAssetBundles[bundleName] = new AssetBundleRecord(path, bundle);

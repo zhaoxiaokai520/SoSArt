@@ -62,7 +62,7 @@ public static class ABBuilder {
             CFileManager.CreateDirectory(AB_LOCATION);
         }
         ABSharedRes.Init();
-        ABRoleBuildMgr.Init();
+        ABRoleRes.Init();
         EditorSceneManager.OpenScene("Assets/Scenes/pack.unity");
     }
 }

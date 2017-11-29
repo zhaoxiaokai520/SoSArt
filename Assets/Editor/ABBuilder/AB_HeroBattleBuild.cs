@@ -95,7 +95,7 @@ public class AB_HeroBattleBuild : AB_HeroBuildBase
 			}
 			else if (directoryInfo.Name.ToLower().Equals("actorinfo"))
 			{
-				ABRoleBuildMgr.mActorInfo.AddCmd(new AB_HeroCmdActorInfo(directoryInfo));
+				ABRoleRes.mActorInfo.AddCmd(new AB_HeroCmdActorInfo(directoryInfo));
 			}
 			else if (directoryInfo.Name.ToLower().Equals("weapon"))
 			{

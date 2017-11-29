@@ -20,13 +20,13 @@ public class AB_HeroPacketBuild
 
 	public Dictionary<string, int> mAllAssetGroupFileList = new Dictionary<string, int>();
 
-	private int miFlag;
+	private int mCryptFlag;//whether encrypt ab or not with specified flag
 
 	public AB_HeroPacketBuild(ABAssetBuildMgr.E_ABBUNLDE_TYPE eType, string bundlename, int flag = 0)
 	{
 		this.meType = eType;
 		this.msBundleName = bundlename;
-		this.miFlag = flag;
+		this.mCryptFlag = flag;
 		if (!this.msBundleName.EndsWith(AB_Common.AB_EXT))
 		{
 			this.msBundleName += AB_Common.AB_EXT;
@@ -149,8 +149,8 @@ public class AB_HeroPacketBuild
 		this.mAssetGroupInfo = AB_GatherResInfo.CreateCResourcePackerInfo();
 		this.mAssetGroupInfo.m_pathInIFS = AB_Common.AB_RES_INFO_PATH + this.msBundleName.ToLower();
 		this.mAssetGroupInfo.m_tag = this.ABType2ResTag(this.meType);
-		this.mAssetGroupInfo.m_flags = this.miFlag;
-		if (AB_Encrypt.IsEncryptFile(this.miFlag))
+		this.mAssetGroupInfo.m_flags = this.mCryptFlag;
+		if (AB_Encrypt.IsEncryptFile(this.mCryptFlag))
 		{
 			AB_Encrypt.AddEncryptFile(this.mAssetGroupInfo);
 		}
@@ -161,7 +161,7 @@ public class AB_HeroPacketBuild
 			item.m_extension = CFileManager.GetExtension(current);
 			this.mAssetGroupInfo.m_resourceInfos.Add(item);
 		}
-		ABRoleBuildMgr.mHeroResPackers.Add(this.mAssetGroupInfo);
+		ABRoleRes.mHeroResPackers.Add(this.mAssetGroupInfo);
 	}
 
 	private int ABType2ResTag(ABAssetBuildMgr.E_ABBUNLDE_TYPE eType)
