@@ -47,6 +47,7 @@ public static class ABBuilder {
         ABAssetBuildMgr.Clear();
         //AB_ShaderBuild.BuildShader();
         ABSharedRes.BuildSharedRes();
+        ABRoleRes.BuildRoles();
         AssetDatabase.Refresh();
         BuildPipeline.BuildAssetBundles(AB_PATH, ABAssetBuildMgr.Parse(), opt, BUILD_TARGET);
         stopwatch.Stop();

@@ -227,7 +227,7 @@ public static class AB_Common
 		EditorUtility.DisplayProgressBar("Build All", "Build Hero.....", 0.3f);
 		stopwatch.Reset();
 		stopwatch.Start();
-		ABRoleRes.BuildHero();
+		ABRoleRes.BuildRoles();
 		stopwatch.Stop();
         UnityEngine.Debug.Log("Pass Time Hero: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build Scene.....", 0.45f);

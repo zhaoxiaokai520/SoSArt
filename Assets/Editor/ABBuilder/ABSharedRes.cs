@@ -31,7 +31,9 @@ public class ABSharedRes
 
 	private static void BuildSharedResU5()
 	{
-		ABSharedRes.FindFolder(new DirectoryInfo(msSharedFolder), "Public*");
+        List<DirectoryInfo> folders = new List<DirectoryInfo>();
+
+        ABUtils.FindFolder(new DirectoryInfo(msSharedFolder), "Public*", folders);
 		for (int i = 0; i < ABSharedRes.mFolders.Count; i++)
 		{
 			ABSharedRes.BuildAssetBundle(ABSharedRes.mFolders[i]);
@@ -43,7 +45,7 @@ public class ABSharedRes
 	{
 		string empty = string.Empty;
 		string empty2 = string.Empty;
-		if (ABSharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
+		if (ABUtils.GetFolder(dd.FullName, ref empty, ref empty2))
 		{
 			string assetBundleName = ABSharedRes.GetAssetBundleName(empty, empty2);
 			ABAssetBuildMgr.AssetBundleBuildEX assetBundleBuild = ABAssetBuildMgr.GetAssetBundleBuild(ABSharedRes.GetType(empty), assetBundleName);
@@ -95,7 +97,7 @@ public class ABSharedRes
 	{
 		string empty = string.Empty;
 		string empty2 = string.Empty;
-		if (ABSharedRes.GetFolder(dd.FullName, ref empty, ref empty2))
+		if (ABUtils.GetFolder(dd.FullName, ref empty, ref empty2))
 		{
 			string assetGroupBundleName = ABSharedRes.GetAssetGroupBundleName(empty, empty2);
 			AssetGroupInfo_t assetGroupInfo_t = AB_GatherResInfo.CreateCResourcePackerInfo();
@@ -137,62 +139,6 @@ public class ABSharedRes
 			}
 			ABSharedRes.mResPackerInfos.Add(assetGroupInfo_t);
 		}
-	}
-
-	private static void FindFolder(DirectoryInfo path)
-	{
-		FileInfo[] files = path.GetFiles("Public*");
-		for (int i = 0; i < files.Length; i++)
-		{
-			if (files[i].Extension != ".meta")
-			{
-				ABSharedRes.mFolders.Add(path);
-				break;
-			}
-		}
-		DirectoryInfo[] directories = path.GetDirectories();
-		for (int j = 0; j < directories.Length; j++)
-		{
-			ABSharedRes.FindFolder(directories[j]);
-		}
-	}
-
-    private static void FindFolder(DirectoryInfo path, string searchPattern)
-    {
-        DirectoryInfo[] dirs = path.GetDirectories(searchPattern);
-        for (int i = 0; i < dirs.Length; i++)
-        {
-            if (null != dirs[i])
-            {
-                ABSharedRes.mFolders.Add(dirs[i]);
-            }
-        }
-    }
-
-    private static bool GetFolder(string path, ref string folder1, ref string folder2)
-	{
-		path = path.Replace("\\", "/");
-		int num = path.IndexOf(ABSharedRes.msSharedFolder);
-		if (num == -1)
-		{
-			return false;
-		}
-		string text = path.Substring(num + ABSharedRes.msSharedFolder.Length);
-		if (text.Contains("/"))
-		{
-			string[] array = text.Split(new char[]
-			{
-				'/'
-			});
-			folder1 = array[0];
-			folder2 = array[array.Length - 1];
-		}
-		else
-		{
-			folder1 = text;
-			folder2 = string.Empty;
-		}
-		return true;
 	}
 
 	private static ABAssetBuildMgr.E_ABBUNLDE_TYPE GetType(string folder1)
