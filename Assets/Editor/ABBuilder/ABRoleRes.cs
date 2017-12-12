@@ -8,7 +8,7 @@ public class ABRoleRes
 
 	public static AB_HeroPacketBuild mActorInfo = null;
 
-	public static string roleLocation = "Assets/RawRes/Role";
+	public static string roleLocation = "Assets/RawRes/Role*";
 
 	public static string msHeroShowLocation = "Assets/Exporter/HeroShow";
 
@@ -23,8 +23,6 @@ public class ABRoleRes
 		num |= 8;
 
         //build rolebase, shared role res
-
-
 		ABRoleRes.CreateRoleList();
 		for (int i = 0; i < ABRoleRes.mHeroList.Count; i++)
 		{
@@ -37,14 +35,19 @@ public class ABRoleRes
     /// </summary>
 	private static void CreateRoleList()
 	{
-		DirectoryInfo[] directories = new DirectoryInfo(ABRoleRes.roleLocation).GetDirectories();
-		for (int i = 0; i < directories.Length; i++)
+        List<DirectoryInfo> folders = new List<DirectoryInfo>();
+        ABUtils.FindFolder(new DirectoryInfo(ABUtils.BaseFolder), "Role*", folders);
+        //DirectoryInfo[] directories = new DirectoryInfo(ABRoleRes.roleLocation).GetDirectories();
+        for (int i = 0; i < folders.Count; i++)
 		{
-			DirectoryInfo directoryInfo = directories[i];
-			int num = 0;
-			if (int.TryParse(directoryInfo.Name, out num) && num > 100 && num < 1000)
+			DirectoryInfo dirInfo = folders[i];
+            if (dirInfo.Name.Contains("RolePublic"))//shared role assets
+            {
+
+            }
+            else//heros
 			{
-				AB_HeroBattleBuild item = new AB_HeroBattleBuild(directoryInfo);
+				AB_HeroBattleBuild item = new AB_HeroBattleBuild(dirInfo);
 				ABRoleRes.mHeroList.Add(item);
 			}
 		}

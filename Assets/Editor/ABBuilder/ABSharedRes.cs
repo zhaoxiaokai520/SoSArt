@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class ABSharedRes
 {
-	public static string msSharedFolder = "Assets/RawRes/";
-
 	public static List<AssetGroupInfo_t> mResPackerInfos = new List<AssetGroupInfo_t>();
 
 	public static List<DirectoryInfo> mFolders = new List<DirectoryInfo>();
@@ -33,11 +31,11 @@ public class ABSharedRes
 	{
         List<DirectoryInfo> folders = new List<DirectoryInfo>();
 
-        ABUtils.FindFolder(new DirectoryInfo(msSharedFolder), "Public*", folders);
-		for (int i = 0; i < ABSharedRes.mFolders.Count; i++)
+        ABUtils.FindFolder(new DirectoryInfo(ABUtils.BaseFolder), "Public*", folders);
+		for (int i = 0; i < folders.Count; i++)
 		{
-			ABSharedRes.BuildAssetBundle(ABSharedRes.mFolders[i]);
-			ABSharedRes.BuildResourceInfo(ABSharedRes.mFolders[i]);
+			ABSharedRes.BuildAssetBundle(folders[i]);
+			ABSharedRes.BuildResourceInfo(folders[i]);
 		}
 	}
 
