@@ -121,7 +121,7 @@ public class AB_HeroPacketBuild
 		{
 			if (this.meType == ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_SHADER)
 			{
-				ABAssetBuildMgr.ForceAddAsset(this.mAssetBundle, current);
+				ABAssetBuildMgr.AddAsset(this.mAssetBundle, current);
 			}
 			else
 			{
@@ -137,7 +137,7 @@ public class AB_HeroPacketBuild
 					}
 					else
 					{
-						ABAssetBuildMgr.ForceAddAsset(this.mAssetBundle, current);
+						ABAssetBuildMgr.AddAsset(this.mAssetBundle, current);
 					}
 				}
 			}

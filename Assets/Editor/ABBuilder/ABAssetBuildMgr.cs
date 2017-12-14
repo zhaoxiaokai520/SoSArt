@@ -50,7 +50,11 @@ public class ABAssetBuildMgr
 		E_SHADER,
 		E_TEXTURE,
 		E_EFFECT,
-		E_SHARED,
+        E_ANIM,
+        E_CONTROLLER,
+        E_MATERIAL,
+        E_MODEL,
+        E_SHARED,
 		E_GlobalCommon,
 		E_UI,
 		E_BT,
@@ -67,6 +71,9 @@ public class ABAssetBuildMgr
 		E_ILLEGAL,
         E_CONFIG,
         E_CONFIG_MAP,
+        E_ROLE_PUBLIC,
+        E_ROLE,
+        
 	}
 
 	public class CollectRedundancy
@@ -217,34 +224,25 @@ public class ABAssetBuildMgr
 		return null;
 	}
 
-	public static void AddAsset(ABAssetBuildMgr.AssetBundleBuildEX ab, string assetName)
-	{
-		if (!ABAssetBuildMgr.ContainAsset(ab, assetName))
-		{
-			bool flag = ABAssetBuildMgr.CheckRedundancy(assetName, ab);
-			string extension = CFileManager.GetExtension(assetName);
-			bool flag2 = false;
-			for (int i = 0; i < ABAssetBuildMgr.mExcludeExt.Length; i++)
-			{
-				if (extension.ToLower().Equals(ABAssetBuildMgr.mExcludeExt[i]))
-				{
-					flag2 = true;
-					break;
-				}
-			}
-			if (!flag2 && !flag)
-			{
-				ab.assetNames.Add(assetName);
-			}
-		}
-	}
-
-	public static void ForceAddAsset(ABAssetBuildMgr.AssetBundleBuildEX ab, string assetName)
+	public static void AddAsset(ABAssetBuildMgr.AssetBundleBuildEX ab, string assetName, bool checkExclude = false)
 	{
 		if (!ABAssetBuildMgr.ContainAsset(ab, assetName) && !ABAssetBuildMgr.CheckRedundancy(assetName, ab))
 		{
-			ab.assetNames.Add(assetName);
-		}
+            if (checkExclude)
+            {
+                string extension = CFileManager.GetExtension(assetName);
+                for (int i = 0; i < ABAssetBuildMgr.mExcludeExt.Length; i++)
+                {
+                    if (extension.ToLower().Equals(ABAssetBuildMgr.mExcludeExt[i]))
+                    {
+                        //not need to add to asset bundle
+                        return;
+                    }
+                }
+            }
+
+            ab.assetNames.Add(assetName);
+        }
 	}
 
 	public static bool ContainAsset(ABAssetBuildMgr.AssetBundleBuildEX ab, string assetname)

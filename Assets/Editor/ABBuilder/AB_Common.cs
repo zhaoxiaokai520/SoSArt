@@ -233,7 +233,7 @@ public static class AB_Common
 		EditorUtility.DisplayProgressBar("Build All", "Build Scene.....", 0.45f);
 		stopwatch.Reset();
 		stopwatch.Start();
-		AB_SceneBuild.BuildScene();
+		//ABRoleCmd.BuildScene();
 		stopwatch.Stop();
         UnityEngine.Debug.Log("Pass Time Scene: " + stopwatch.ElapsedMilliseconds);
 		EditorUtility.DisplayProgressBar("Build All", "Build UI Sound.....", 0.6f);

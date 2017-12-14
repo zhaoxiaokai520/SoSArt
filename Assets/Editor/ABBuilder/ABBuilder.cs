@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -47,7 +48,7 @@ public static class ABBuilder {
         ABAssetBuildMgr.Clear();
         //AB_ShaderBuild.BuildShader();
         ABSharedRes.BuildSharedRes();
-        ABRoleRes.BuildRoles();
+        ABBuilder.BuildRoles();
         AssetDatabase.Refresh();
         BuildPipeline.BuildAssetBundles(AB_PATH, ABAssetBuildMgr.Parse(), opt, BUILD_TARGET);
         stopwatch.Stop();
@@ -65,5 +66,33 @@ public static class ABBuilder {
         ABSharedRes.Init();
         ABRoleRes.Init();
         EditorSceneManager.OpenScene("Assets/Scenes/pack.unity");
+    }
+
+
+    public static void BuildRoles()
+    {
+        List<DirectoryInfo> folders = new List<DirectoryInfo>();
+        ABUtils.FindFolder(new DirectoryInfo(ABUtils.BaseFolder), "Role*", folders);
+        for (int i = 0; i < folders.Count; i++)
+        {
+            DirectoryInfo dirInfo = folders[i];
+            string assetBundleName = ABUtils.GetAssetBundleName(dirInfo.Name, "");
+            AB_HeroPacketBuild assetBundleBuild = null;
+            if (dirInfo.Name.Contains("RolePublic"))//shared role assets
+            {
+                assetBundleBuild = new AB_HeroPacketBuild(ABUtils.GetType(dirInfo.Name), assetBundleName);
+            }
+            else//roles
+            {
+                assetBundleBuild = new AB_HeroPacketBuild(ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_ROLE, assetBundleName);
+            }
+            if (null != assetBundleBuild)
+            {
+                ABRoleCmd cmd = new ABRoleCmd(dirInfo);
+                assetBundleBuild.AddCmd(cmd);
+                assetBundleBuild.BuildCmd();
+                assetBundleBuild.BuildRes(null, true);
+            }
+        }
     }
 }

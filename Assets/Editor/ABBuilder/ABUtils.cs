@@ -41,12 +41,13 @@ public class ABUtils {
     {
         path = path.Replace("\\", "/");
         //msSharedFolder = "Assets/Exporter/Common/"
-        int num = path.IndexOf(msSharedFolder);
+        //int num = path.IndexOf(msSharedFolder);
+        int num = path.LastIndexOf("/");
         if (num == -1)
         {
             return false;
         }
-        string text = path.Substring(num + msSharedFolder.Length);
+        string text = path.Substring(num);
         if (text.Contains("/"))
         {
             string[] array = text.Split(new char[]
@@ -62,5 +63,39 @@ public class ABUtils {
             folder2 = string.Empty;
         }
         return true;
+    }
+
+    public static string GetAssetBundleName(string folder1, string folder2)
+    {
+        folder1 = folder1.Replace('.', '_');
+        folder2 = folder2.Replace('.', '_');
+        return (folder1 + folder2).ToLower() + AB_Common.AB_EXT;
+    }
+
+    public static ABAssetBuildMgr.E_ABBUNLDE_TYPE GetType(string folder1)
+    {
+        if (folder1.ToLower().Contains("anim"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_ANIM;
+        }
+        else if (folder1.ToLower().Contains("texture"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_TEXTURE;
+        }
+        else if (folder1.ToLower().Contains("controller"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_CONTROLLER;
+        }
+        else if (folder1.ToLower().Contains("material"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_MATERIAL;
+        }
+        else if (folder1.ToLower().Contains("model"))
+        {
+            return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_MODEL;
+        }
+
+        Debug.LogError("Error Type: " + folder1);
+        return ABAssetBuildMgr.E_ABBUNLDE_TYPE.E_ILLEGAL;
     }
 }
